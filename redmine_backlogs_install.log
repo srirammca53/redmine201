@@ -1,0 +1,142 @@
+Migrating redmine_backlogs (Redmine Backlogs)...
+==  CreateStoriesTasksSprintsAndBurndown: migrating ===========================
+-- add_column(:issues, :position, :integer)
+   -> 0.3953s
+-- add_column(:issues, :story_points, :integer)
+   -> 0.4013s
+-- add_column(:issues, :remaining_hours, :float)
+   -> 0.2786s
+-- add_column(:versions, :sprint_start_date, :date, {:null=>true})
+   -> 0.3448s
+-- create_table(:burndown_days)
+   -> 0.2116s
+-- add_index(:burndown_days, :version_id)
+   -> 0.3559s
+-- execute("update issues set start_date = NULL where due_date < start_date")
+   -> 0.0005s
+==  CreateStoriesTasksSprintsAndBurndown: migrated (1.9888s) ==================
+
+==  MigrateLegacy: migrating ==================================================
+==  MigrateLegacy: migrated (0.0020s) =========================================
+
+==  OrderTasksUsingTree: migrating ============================================
+==  OrderTasksUsingTree: migrated (0.0142s) ===================================
+
+==  ChangeIssuePositionColumn: migrating ======================================
+-- change_column(:issues, :position, :integer, {:null=>true, :default=>nil})
+   -> 0.0835s
+==  ChangeIssuePositionColumn: migrated (0.0837s) =============================
+
+==  AddReleaseTables: migrating ===============================================
+-- create_table(:releases)
+   -> 0.1416s
+-- create_table(:release_burndown_days)
+   -> 0.1220s
+==  AddReleaseTables: migrated (0.2638s) ======================================
+
+==  NullTaskPosition: migrating ===============================================
+-- execute("update issues set position = null where tracker_id = 1")
+   -> 0.0003s
+-- create_table(:backlogs_tmp_set_task_tracker)
+   -> 0.1706s
+-- execute("insert into backlogs_tmp_set_task_tracker (story_root_id, story_lft, story_rgt)\n                select root_id, lft, rgt from issues where tracker_id in (1,2,3)")
+   -> 0.0007s
+-- execute("update issues set tracker_id = 1\n              where exists (select 1 from backlogs_tmp_set_task_tracker where root_id = story_root_id and lft > story_lft and rgt < story_rgt)")
+   -> 0.0005s
+-- drop_table(:backlogs_tmp_set_task_tracker)
+   -> 0.0610s
+==  NullTaskPosition: migrated (0.2852s) ======================================
+
+==  ReinstateRemaining: migrating =============================================
+==  ReinstateRemaining: migrated (0.0002s) ====================================
+
+==  FractionalPoints: migrating ===============================================
+-- add_column(:issues, :fractional_story_points, :float)
+   -> 0.3105s
+-- execute("update issues set fractional_story_points = story_points")
+   -> 0.0005s
+-- remove_column(:issues, :story_points)
+   -> 0.2890s
+-- add_column(:issues, :story_points, :float)
+   -> 0.3008s
+-- execute("update issues set story_points = fractional_story_points")
+   -> 0.0005s
+-- remove_column(:issues, :fractional_story_points)
+   -> 0.7116s
+==  FractionalPoints: migrated (1.6136s) ======================================
+
+==  AddStoryPositions: migrating ==============================================
+-- execute("select max(position) from issues")
+   -> 0.0006s
+-- execute("update issues\n               set position =  + id\n               where position is null and tracker_id in (1,2,3)")
+   -> 0.0004s
+==  AddStoryPositions: migrated (0.0066s) =====================================
+
+==  AddIndexOnIssuesPosition: migrating =======================================
+-- add_index(:issues, :position)
+   -> 0.4856s
+==  AddIndexOnIssuesPosition: migrated (0.4857s) ==============================
+
+==  SumRemainingHours: migrating ==============================================
+-- create_table(:backlogs_tmp_story_remaining_hours)
+   -> 0.1238s
+-- execute("insert into backlogs_tmp_story_remaining_hours (tmp_id, tmp_root_id, tmp_lft, tmp_rgt, tmp_remaining_hours)\n               select id, root_id, lft, rgt, 0\n               from issues\n               where tracker_id in (1,2,3) and lft <> (rgt - 1)")
+   -> 0.0010s
+-- execute("insert into backlogs_tmp_story_remaining_hours (tmp_id, tmp_root_id, tmp_lft, tmp_rgt, tmp_remaining_hours)\n               select issues.id, root_id, lft, rgt, coalesce(remaining_hours, 0)\n               from backlogs_tmp_story_remaining_hours\n               join issues on tmp_root_id = root_id and lft > tmp_lft and rgt < tmp_rgt")
+   -> 0.0006s
+-- execute("update issues\n               set remaining_hours = (\n                        select sum(tmp_remaining_hours)\n                        from backlogs_tmp_story_remaining_hours\n                        where root_id = tmp_root_id and lft < tmp_lft and rgt > tmp_rgt and tmp_lft = (tmp_rgt - 1)\n               )\n               where lft <> (rgt - 1) and id in (select tmp_id from backlogs_tmp_story_remaining_hours)")
+   -> 0.0005s
+-- drop_table(:backlogs_tmp_story_remaining_hours)
+   -> 0.0718s
+==  SumRemainingHours: migrated (0.2060s) =====================================
+
+==  ExpandedJournal: migrating ================================================
+-- create_table(:rb_journals)
+   -> 0.1190s
+==  ExpandedJournal: migrated (0.1191s) =======================================
+
+==  RebuildJournal: migrating =================================================
+-- add_index(:rb_journals, :issue_id)
+   -> 0.2859s
+-- add_index(:rb_journals, :property)
+   -> 0.2895s
+-- add_index(:rb_journals, :timestamp)
+   -> 0.3120s
+-- add_index(:rb_journals, :value)
+   -> 0.3453s
+-- add_index(:rb_journals, [:issue_id, :property, :value])
+   -> 0.3118s
+==  RebuildJournal: migrated (1.5450s) ========================================
+
+==  UniquePositions: migrating ================================================
+-- change_column(:issues, :position, :integer, {:null=>false})
+   -> 0.3559s
+-- add_column(:issues, :position_lock, :integer, {:null=>false, :default=>0})
+   -> 0.3339s
+-- add_index(:issues, [:position, :position_lock], {:unique=>true})
+   -> 0.2785s
+==  UniquePositions: migrated (0.9702s) =======================================
+
+==  CleanJournal: migrating ===================================================
+-- execute("drop table if exists _backlogs_tmp_journal")
+   -> 0.0005s
+-- execute("create table _backlogs_tmp_journal (del_for_issue_id int not null unique)")
+   -> 0.0803s
+-- execute("\n      insert into _backlogs_tmp_journal (del_for_issue_id)\n      select distinct issues.id\n      from issues\n      join rb_journals on issues.id = issue_id\n      where rb_journals.value = ''\n    ")
+   -> 0.0012s
+-- execute("delete from rb_journals where issue_id in (select del_for_issue_id from _backlogs_tmp_journal)")
+   -> 0.0004s
+-- execute("drop table _backlogs_tmp_journal")
+   -> 0.0005s
+==  CleanJournal: migrated (0.0834s) ==========================================
+
+==  FixMissingJournal: migrating ==============================================
+==  FixMissingJournal: migrated (0.0029s) =====================================
+
+==  TrustUniquePositions: migrating ===========================================
+-- remove_index(:issues, [:position, :position_lock])
+   -> 0.3045s
+-- remove_column(:issues, :position_lock)
+   -> 0.3238s
+==  TrustUniquePositions: migrated (0.6286s) ==================================
+

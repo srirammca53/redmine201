@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  disposition: MyString
+  customer: MyString
+  tracker: MyString
+  status: MyString
+  priority: 1
+  order: 1
+  estimated_hours: 1.5
+  description: MyText
+  version: 
+
+two:
+  name: MyString
+  disposition: MyString
+  customer: MyString
+  tracker: MyString
+  status: MyString
+  priority: 1
+  order: 1
+  estimated_hours: 1.5
+  description: MyText
+  version: 
