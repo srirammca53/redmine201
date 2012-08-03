@@ -1,0 +1,29 @@
+<table border="1">
+	<h2> <%= @project.name %> </h2>
+		<p><b>List of Iterations</b></p>
+	
+		<tr width="900px">
+			<th width ="200px">Name</th>
+			<th width ="100px">Start_date</th>
+			<th width ="100px">End_date</th>
+			<th width ="500px">Description</th>
+		</tr>
+		<%@project.iteration.each do |it| %>
+			<tr width="900px" align="center">
+				<td width ="200px">
+					<%= link_to it.name, project_iteration_path(@project.id, it.id) %>
+				</td>
+				<td width ="100px">
+					<%= it.start_date %>
+				</td>
+				<td width ="100px">
+					<%= it.end_date %>
+				</td>
+				<td width ="500px">
+					<%= it.description %>
+				</td>
+			</tr>
+	     <% end %>
+</table>
+<%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
+

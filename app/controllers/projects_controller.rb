@@ -140,11 +140,13 @@ class ProjectsController < ApplicationController
 	
   # Show @project
   def show
+ @project.safe_attributes = params[:project]
+
     if params[:jump]
       # try to redirect to the requested menu item
       redirect_to_project_menu_item(@project, params[:jump]) && return
     end
-
+   
     @users_by_role = @project.users_by_role
     @subprojects = @project.children.visible.all
     @news = @project.news.find(:all, :limit => 5, :include => [ :author, :project ], :order => "#{News.table_name}.created_on DESC")
@@ -184,6 +186,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project.safe_attributes = params[:project]
+
     if validate_parent_id && @project.save
       @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
       respond_to do |format|

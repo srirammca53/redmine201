@@ -86,7 +86,7 @@ RedmineApp::Application.routes.draw do
   match 'watchers/autocomplete_for_user', :controller=> 'watchers', :action => 'autocomplete_for_user', :via => :get
 
   match 'projects/:id/settings/:tab', :to => "projects#settings"
-
+ 
   resources :projects do
     member do
       get 'settings'
@@ -95,6 +95,7 @@ RedmineApp::Application.routes.draw do
       post 'unarchive'
       match 'copy', :via => [:get, :post]
     end
+ resources :iterations
 
     resources :memberships, :shallow => true, :controller => 'members', :only => [:index, :show, :create, :update, :destroy] do
       collection do
