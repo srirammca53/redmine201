@@ -1,4 +1,5 @@
 <html>
+<p> Iteration : <h2><%= @iteration.name %></h2></p>
 <table>
 <tr>
 
@@ -34,4 +35,7 @@ Description
 </td>
 </tr>
 </table>
+<%#= @project.id %>
+<%#= @iteration.id %>
+<%= link_to "users_stories", project_iteration_stories_path(@project.id, @iteration.id )%>
 </html>

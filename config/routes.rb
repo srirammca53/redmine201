@@ -95,7 +95,9 @@ RedmineApp::Application.routes.draw do
       post 'unarchive'
       match 'copy', :via => [:get, :post]
     end
- resources :iterations
+ resources :iterations do 
+    resources :stories
+  end
 
     resources :memberships, :shallow => true, :controller => 'members', :only => [:index, :show, :create, :update, :destroy] do
       collection do
@@ -123,7 +125,7 @@ RedmineApp::Application.routes.draw do
       collection do
         put 'close_completed'
       end
-resources :userstories
+
     end
     match 'versions.:format', :to => 'versions#index'
     match 'roadmap', :to => 'versions#index', :format => false

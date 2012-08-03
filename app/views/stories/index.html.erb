@@ -1,0 +1,24 @@
+<table >
+	<h2> <%= @iteration.name %> </h2>
+		<p><b>List of Userstories</b></p>
+	
+		<tr width="1000px">
+			<th width ="200px">Name</th>
+			<th width ="200px">Description</th>
+			<th width ="100px">Customer</th>
+			<th width ="100px">Tracker</th>
+			<th width ="100px">Status</th>
+			<th width ="100px">Priority</th>
+			<th width ="100px">Order</th>
+			<th width ="100px">Estimated hours</th>
+		</tr>
+		<%@iteration.story.each do |st| %>
+			<tr width="1000px" align="center">
+				<td width ="200px">
+					<%= link_to st.name, project_iteration_story_path(@project.id,@iteration.id, st.id) %>
+				</td>
+				
+			</tr>
+	     <% end %>
+</table>
+<%= link_to "create story" , new_project_iteration_story_path(@project.id,@iteration.id) %>
