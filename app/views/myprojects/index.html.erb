@@ -1,0 +1,10 @@
+<h2><b><u>My Projects</u></b></h2>
+<hr/>
+<% @member.each do |em| %>
+
+<% @pro_id = em.project_id %>
+<% @myprojects = Project.find(:all, :conditions => {:id => @pro_id}) %>
+
+<% end %>
+
+<%= @myprojects %>

@@ -1,5 +1,5 @@
 <html>
-<p> Iteration : <h2><%= @iteration.name %></h2></p>
+<p> Userstory : <h2><%= @storie.name %></h2></p>
 <table>
 <tr>
 
@@ -68,3 +68,6 @@ Estimation hours
 </tr>
 
 </table>
+<hr/>
+
+<%= link_to " List of tasks" ,   project_iteration_story_tasks_path(@project.id,@iteration.id,@storie.id)%>

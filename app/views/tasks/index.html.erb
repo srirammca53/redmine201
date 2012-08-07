@@ -1,0 +1,34 @@
+
+<table >
+	
+		<p><b>List of Tasks</b></p>
+	
+		<tr width="1000px">
+			<th width ="200px">Name</th>
+			<th width ="200px">Task_type</th>
+			<th width ="100px">Disposition</th>
+			<th width ="100px">Acceptor</th>
+			<th width ="100px">Estimation time</th>
+			<th width ="400px">Description</th>
+			
+		</tr>
+		<%@story.tasks.each do |ts| %>
+			<tr width="1000px" align="center">
+				<td width ="200px">
+					<%=  ts.name %>
+				</td>
+				<td width ="200px">
+					<%=  ts.task_type %>
+				</td><td width ="100px">
+					<%=  ts.disposition %>
+				</td><td width ="100px">
+					<%=  ts.acceptor %>
+				</td><td width ="100px">
+					<%=  ts.estimated_hours %>
+				</td><td width ="400px">
+					<%=  ts.description %>
+				</td>
+			</tr>
+	     <% end %>
+</table>
+<%= link_to "create Task" , new_project_iteration_story_task_path(@project.id,@iteration.id,@storie.id) %>
