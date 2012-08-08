@@ -8,6 +8,7 @@ def index
 end
 
 def new
+@project = Project.find(params[:project_id])
  @iteration = Iteration.find(params[:iteration_id])
 
 @story = @iteration.story.new
