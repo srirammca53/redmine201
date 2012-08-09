@@ -1,36 +1,19 @@
-<div class="contextual">
-    <%= link_to l(:label_personalize_page), :action => 'page_layout' %>
-</div>
+<h2><b><u>My Projects</u></b></h2>
+<hr/>
+<% i=0 %>
+<% @member.each do |em| %>
+<% @pro_id = em.project_id %>
+	<% @myprojects_i = Project.find(:all, :conditions => {:id => @pro_id}) %>
+	<% @myprojects_i.each do |pro| %>
+		<b><%= link_to pro.name, project_path(pro.id) %></b>
+	<% end %>
+	<% @iteration = Iteration.find(:all, :conditions => {:project_id => @pro_id})%>
+	<% @iteration.each do |iter|%>
+		<%= iter.name%>
+	<%end%>	<br>
+<% end %>
 
-<h2><%=l(:label_my_page)%></h2>
 
-<div id="list-top">
-  <% @blocks['top'].each do |b|
-     next unless MyController::BLOCKS.keys.include? b  %>
-  <div class="mypage-box">
-    <%= render :partial => "my/blocks/#{b}", :locals => { :user => @user } %>
-  </div>
-  <% end if @blocks['top'] %>
-</div>
 
-<div id="list-left" class="splitcontentleft">
-  <% @blocks['left'].each do |b|
-     next unless MyController::BLOCKS.keys.include? b %>
-  <div class="mypage-box">
-    <%= render :partial => "my/blocks/#{b}", :locals => { :user => @user } %>
-  </div>
-  <% end if @blocks['left'] %>
-</div>
 
-<div id="list-right" class="splitcontentright">
-  <% @blocks['right'].each do |b|
-     next unless MyController::BLOCKS.keys.include? b %>
-  <div class="mypage-box">
-    <%= render :partial => "my/blocks/#{b}", :locals => { :user => @user } %>
-  </div>
-  <% end if @blocks['right'] %>
-</div>
 
-<%= context_menu issues_context_menu_path %>
-
-<% html_title(l(:label_my_page)) -%>

@@ -2,12 +2,10 @@
 <hr/>
 <% i=0 %>
 <% @member.each do |em| %>
-
 <% @pro_id = em.project_id %>
-<% @myprojects_i = Project.find(:all, :conditions => {:id => @pro_id}) %>
+	<% @myprojects_i = Project.find(:all, :conditions => {:id => @pro_id}) %>
 	<% @myprojects_i.each do |pro| %>
-
-	<b><%= pro.name %></b><br/><br/>
+		<b><%= link_to pro.name, project_path(pro.id) %></b><br/><br/>
 	<% end %>
 <% end %>
 

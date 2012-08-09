@@ -38,12 +38,17 @@ class MyController < ApplicationController
   def index
     page
     render :action => 'page'
+    
   end
 
   # Show user's page
   def page
     @user = User.current
     @blocks = @user.pref[:my_page_layout] || DEFAULT_LAYOUT
+    @projects = Project.find(:all)
+ @user = User.current
+@pro_arrays = Array.new
+@member = Member.find(:all, :conditions => {:user_id => @user })
   end
 
   # Edit user's account
