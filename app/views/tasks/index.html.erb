@@ -15,7 +15,7 @@
 		<%@story.tasks.each do |ts| %>
 			<tr width="1000px" align="center">
 				<td width ="200px">
-					<%=  ts.name %>
+					<%=  link_to ts.name,  project_iteration_story_task_path(@project_id,@iteration_id,@story.id,@task.id %>
 				</td>
 				<td width ="200px">
 					<%=  ts.task_type %>
