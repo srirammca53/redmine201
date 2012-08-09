@@ -1,5 +1,7 @@
 class TasksController < ApplicationController
 def index
+  @project = Project.find(params[:project_id])
+  @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
   @tasks = Task.find(:all)
 

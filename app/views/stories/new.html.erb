@@ -1,5 +1,5 @@
 <html>
-<p> New Userstory for <b><%= @story.name %></b> </p>
+<p> New Userstory for <b><%#= @story.name %></b> </p>
 <table border="1" >
 <tr>
 <%= form_for @story, :url => {:action => :create, :id => @iteration_id } do |f| %>

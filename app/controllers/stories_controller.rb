@@ -2,13 +2,14 @@ class StoriesController < ApplicationController
 
 
 def index
+@project = Project.find(params[:project_id])
   @iteration = Iteration.find(params[:iteration_id])
-@userstories = Story.find(:all)
+@stories = Story.find(:all)
 
 end
 
 def new
-@project = Project.find(params[:project_id])
+
  @iteration = Iteration.find(params[:iteration_id])
 
 @story = @iteration.story.new
@@ -16,14 +17,17 @@ def new
 end
 
 def create
- @iteration = Iteration.find(params[:iteration_id])
-    @storie = @iteration.story.create(params[:story])
-    render :action => "show"
+	@project = Project.find(params[:project_id])
+	 @iteration = Iteration.find(params[:iteration_id])
+      @story = @iteration.story.create(params[:story])	
+   
+ render :action => "show"
 end
 
 
 def show
+@project = Project.find(params[:project_id])
 @iteration = Iteration.find(params[:iteration_id])
- @storie = @iteration.story.find(params[:id])
+ @story = @iteration.story.find(params[:id])
 end
 end

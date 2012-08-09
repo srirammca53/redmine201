@@ -1,5 +1,5 @@
 <html>
-<p> Userstory : <h2><%= @storie.name %></h2></p>
+<p> story : <h2><%= @story.name %></h2></p>
 <table>
 <tr>
 
@@ -7,67 +7,67 @@
 Name:
 </td>
 <td>
-<%= @storie.name %>
+<%= @story.name %>
 </td>
 </tr>
 <tr>
 <td>
-Description
+description
 </td>
 <td>
-<%= @storie.description %>
+<%= @story.description%>
 </td>
 </tr>
 <tr>
 <td>
-Customer
+customer
 </td>
 <td>
-<%= @storie.customer %>
+<%= @story.customer %>
 </td>
 </tr>
 <tr>
 <td>
-Tracker
+tracker
 </td>
 <td>
-<%= @storie.tracker %>
+<%= @story.tracker %>
 </td>
 </tr>
 <tr>
 <td>
-Status
+status
 </td>
 <td>
-<%= @storie.status %>
+<%= @story.status %>
 </td>
 </tr>
 <tr>
 <td>
-Priority
+priority
 </td>
 <td>
-<%= @storie.priority %>
+<%= @story.priority %>
 </td>
 </tr>
 <tr>
 <td>
-Order
+order
 </td>
 <td>
-<%= @storie.order %>
+<%= @story.order %>
 </td>
 </tr>
 <tr>
 <td>
-Estimation hours
+Estimated_hours
 </td>
 <td>
-<%#= @storie.Estimated_hours %>
+<%= @story.Estimated_hours %>
 </td>
 </tr>
-
 </table>
-<hr/>
-
-<%= link_to " List of tasks" ,   project_iteration_story_tasks_path(@project.id,@iteration.id,@storie.id)%>
+<%#= @project.id %>
+<%#= @story.id %>
+<%= link_to "users_stories", project_iteration_story_tasks_path(@project.id,@iteration.id, @story.id )%>
+</html>
