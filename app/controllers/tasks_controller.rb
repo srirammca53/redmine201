@@ -22,8 +22,8 @@ end
 
 
 def show
-  @project = Project.find(params[:project_id])
-@iteration = Iteration.find(params[:iteration_id])
+@project = Project.find(params[:project_id])
+  @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
  @task = @story.tasks.find(params[:id])
 end
