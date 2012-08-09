@@ -1,5 +1,5 @@
 <html>
-<p> Userstory : <h2><%= @task.name %></h2></p>
+<p> Task : <h2><%= @task.name %></h2></p>
 <table>
 <tr>
 
@@ -34,14 +34,7 @@ acceptor
 <%= @task.acceptor %>
 </td>
 </tr>
-<tr>
-<td>
-Status
-</td>
-<td>
-<%= @task.status %>
-</td>
-</tr>
+
 <tr>
 <td>
 estimated_hours
@@ -52,22 +45,15 @@ estimated_hours
 </tr>
 <tr>
 <td>
-Order
-</td>
-<td>
-<%= @task.order %>
-</td>
-</tr>
-<tr>
-<td>
 description
 </td>
 <td>
-<%#= @task.description %>
+<%= @task.description %>
 </td>
 </tr>
+
 
 </table>
 <hr/>
 
-<%= link_to " Back" ,   project_iteration_story_tasks_path(@project.id,@iteration.id,@task.id)%>
+<%#= link_to " Back" ,   project_iteration_story_tasks_path(@project.id,@iteration.id,@task.id)%>
