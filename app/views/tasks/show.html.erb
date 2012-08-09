@@ -55,5 +55,6 @@ description
 
 </table>
 <hr/>
-
-<%#= link_to " Back" ,   project_iteration_story_tasks_path(@project.id,@iteration.id,@task.id)%>
+<%= @project.inspect %>
+<%= @iteration.inspect %>
+<%#= link_to "users_stories", project_iteration_story_tasks_path(@project.id,@iteration.id, @story.id )%>
