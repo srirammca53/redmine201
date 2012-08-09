@@ -9,7 +9,7 @@
   </div>
   <div class="field">
     <%= f.label :task_type %><br />
-    <%= f.text_field :task_type %>
+    <%= f.select(:task_type, options_for_select(["Bug", "Feature", "Support"])) %>
   </div>
   <div class="field">
     <%= f.label :disposition %><br />
