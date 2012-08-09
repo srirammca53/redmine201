@@ -140,6 +140,8 @@ class ProjectsController < ApplicationController
 	
   # Show @project
   def show
+@project = Project.find(params[:id])
+
  @project.safe_attributes = params[:project]
 
     if params[:jump]

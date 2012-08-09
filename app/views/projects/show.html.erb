@@ -10,6 +10,29 @@
   <div class="wiki">
     <%= textilizable @project.description %>
   </div>
+<hr/>
+<table width="500px">
+<tr width="500px">
+
+<th width="100px"><b>name</b></th>
+<th width="100px"><b>task_type</b></th>
+<th width="100px"><b>estimated_hours</b></th>
+<th width="200px"><b>description</b></th>
+
+</tr>
+<% @project.iteration.each do |it| %>
+	<% it.story.each do |st| %>
+		<% st.tasks.each do |task| %>
+			<tr width="500px">
+			<td width="100px"><%= task.name %></td>
+			<td width="100px"><%= task.task_type %></td>
+			<td width="100px"><%= task.estimated_hours %></td>
+			<td width="200px"><%= task.description %></td>
+			</tr>
+		<% end %>
+	<% end %>
+<% end %>
+</table>
   <ul>
   <% unless @project.homepage.blank? %>
     <li><%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %></li>
@@ -26,28 +49,28 @@
   </ul>
 
   <% if User.current.allowed_to?(:view_issues, @project) %>
-  <div class="issues box">
-    <h3><%=l(:label_issue_tracking)%></h3>
-    <ul>
+  <div>
+   
+    
     <% for tracker in @trackers %>
-      <li><%= link_to h(tracker.name), :controller => 'issues', :action => 'index', :project_id => @project,
+      <%#= link_to h(tracker.name), :controller => 'issues', :action => 'index', :project_id => @project,
                                                 :set_filter => 1,
-                                                "tracker_id" => tracker.id %>:
-          <%= l(:label_x_open_issues_abbr_on_total, :count => @open_issues_by_tracker[tracker].to_i,
+                                                "tracker_id" => tracker.id %>
+          <%#= l(:label_x_open_issues_abbr_on_total, :count => @open_issues_by_tracker[tracker].to_i,
                                                     :total => @total_issues_by_tracker[tracker].to_i) %>
-      </li>
+      
     <% end %>
-    </ul>
-    <p>
-      <%= link_to l(:label_issue_view_all), :controller => 'issues', :action => 'index', :project_id => @project, :set_filter => 1 %>
+  
+  
+      <%#= link_to l(:label_issue_view_all), :controller => 'issues', :action => 'index', :project_id => @project, :set_filter => 1 %>
       <% if User.current.allowed_to?(:view_calendar, @project, :global => true) %>
-        | <%= link_to(l(:label_calendar), :controller => 'calendars', :action => 'show', :project_id => @project) %>
+       <%#= link_to(l(:label_calendar), :controller => 'calendars', :action => 'show', :project_id => @project) %>
       <% end %>
       <% if User.current.allowed_to?(:view_gantt, @project, :global => true) %>
-        | <%= link_to(l(:label_gantt), :controller => 'gantts', :action => 'show', :project_id => @project) %>
-	| <%= link_to "iterations", project_iterations_path(@project.id)  %>
+        <%#= link_to(l(:label_gantt), :controller => 'gantts', :action => 'show', :project_id => @project) %>
+	 <%= link_to "iterations", project_iterations_path(@project.id)  %>
       <% end %>
-    </p>
+   
   </div>
   <% end %>
   <%= call_hook(:view_projects_show_left, :project => @project) %>
