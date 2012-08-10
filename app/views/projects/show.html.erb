@@ -5,33 +5,36 @@
 </div>
 
 <h2><%=l(:label_overview)%></h2>
-
+<% user = User.current.lastname %>
 <div class="splitcontentleft">
   <div class="wiki">
     <%= textilizable @project.description %>
   </div>
 <hr/>
-<table width="500px">
-<tr width="500px">
+<table width="600px">
+<tr width="600px">
 
 <th width="100px"><b>name</b></th>
 <th width="100px"><b>task_type</b></th>
 <th width="100px"><b>estimated_hours</b></th>
+<th width="100px"><b>acceptor</b></th>
 <th width="200px"><b>description</b></th>
 
 </tr>
 <% @project.iteration.each do |it| %>
 <% @pro_id = Project.find(params[:id]) %>
 	<% it.story.each do |st| %>
-	
 		<% st.tasks.each do |task| %>
-			<tr width="500px">
-			<% @project.inspect%>
+			<% if task.acceptor == user %>
+			<tr width="600px">	
 			<td width="100px"><%=link_to task.name, project_iteration_story_task_path(@pro_id, it.id, st.id, task.id)%></td>
 			<td width="100px"><%= task.task_type %></td>
 			<td width="100px"><%= task.estimated_hours %></td>
+			<td width="100px"><%= task.acceptor %></td>
 			<td width="200px"><%= task.description %></td>
 			</tr>
+                       
+ 			<% end %>
 		<% end %>
 	<% end %>
 <% end %>

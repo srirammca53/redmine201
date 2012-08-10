@@ -67,7 +67,7 @@ Estimated_hours
 </td>
 </tr>
 </table>
-<%#= @project.id %>
-<%#= @story.id %>
-<%= link_to "users_stories", project_iteration_story_tasks_path(@project.id,@iteration.id, @story.id )%>
+<%= @project.id.inspect %>
+<%= @story.id.inspect %>
+<%= link_to "tasks list",  project_iteration_story_tasks_path(@project.id,@iteration.id, @story.id )%>
 </html>
