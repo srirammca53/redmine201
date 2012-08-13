@@ -11,12 +11,17 @@
 			<th width ="100px">Priority</th>
 			<th width ="100px">Order</th>
 			<th width ="100px">Estimated hours</th>
+			<th width ="100px">Edit</th>
 		</tr>
 		<%@iteration.story.each do |st| %>
 			<tr width="1000px" align="center">
 				<td width ="200px">
 
 					<%=  link_to st.name, project_iteration_story_path(@project.id,@iteration.id, st.id) %>
+				</td>
+				<td width ="200px">
+
+					<%=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
 				</td>
 				
 			</tr>

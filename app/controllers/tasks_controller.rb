@@ -33,25 +33,26 @@ def create
     render :action => "show"
 end
 
-
 def edit
-@task = Task.find(params[:id])
-
+    @project = Project.find(params[:project_id])
+    @iteration = @project.iteration.find(params[:iteration_id])
+    @story = @iteration.story.find(params[:story_id])
+    @task = @story.tasks.find(params[:id])
 end
 
 def update
-    @task = Task.find(params[:id])
-
-    respond_to do |format|
-      if @task.update_attributes(params[:task])
-        format.html { redirect_to @task, notice: 'task was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      end
+    @project = Project.find(params[:project_id])
+    @iteration = @project.iteration.find(params[:iteration_id])
+    @story = @iteration.story.find(params[:story_id])
+    @task = @story.tasks.find(params[:id])
+ 
+    if @task.update_attributes(params[:task])
+        render :action => "show"
+    else
+		 render :action => "edit"
     end
-  end
+
+end
 
 
 def show
@@ -59,5 +60,12 @@ def show
   @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
  @task = @story.tasks.find(params[:id])
+
 end
+
+def delete
+   raise "demo".inspect
+end
+
+
 end

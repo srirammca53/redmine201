@@ -1,6 +1,46 @@
 <h1>Editing Iteration</h1>
 
-<%= render 'form' %>
+<html>
+<p> New Iteration for <b><%= @project.name %></b> </p>
+<table border="1" >
+<tr>
+<%= form_for @iteration , :url => {:action => :update, :id => @project.id } do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :Start_date %><br />
+    <%#= f.date_select :start_date %>
+    <%= f.text_field :start_date, :id => :popupDatepicker %>
+  </div>
+  <div class="field">
+    <%= f.label :End_date %><br />
+    <%#= f.date_select :end_date %>
+    <%= f.text_field :end_date, :id => :popupDatepicker1 %>
+  </div>
+   <div class="field">
+    <%= f.label :Status %><br />
+   <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :Description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</tr>
+ </table>
+</html>
+ <script>
+$(function() {
+	$('#popupDatepicker').datepick({dateFormat: 'yyyy-mm-dd'});
+	
+	$('#popupDatepicker1').datepick({dateFormat: 'yyyy-mm-dd'});
+});
 
-<%#= link_to 'Show', @animal %> |
-<%#= link_to 'Back', animals_path %>
+</script>
+
+

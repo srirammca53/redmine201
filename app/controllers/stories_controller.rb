@@ -21,7 +21,7 @@ def create
 	 @iteration = Iteration.find(params[:iteration_id])
       @story = @iteration.story.create(params[:story])	
    
- render :action => "show"
+       render :action => "show"
 end
 
 
@@ -29,5 +29,10 @@ def show
 @project = Project.find(params[:project_id])
 @iteration = Iteration.find(params[:iteration_id])
  @story = @iteration.story.find(params[:id])
+end
+def edit
+	@project = Project.find(params[:project_id])
+   @iteration = Iteration.find(params[:iteration_id])
+   @story = @iteration.story.find(params[:id])
 end
 end

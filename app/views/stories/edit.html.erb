@@ -1,0 +1,37 @@
+<html>
+<table border="1" >
+<tr>
+<%= form_for @story, :url => {:action => :update, :id => @iteration_id } do |f| %>
+ <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :Description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :Customer %><br />
+    <%= f.text_field :customer %>
+  </div>
+  <div class="field">
+    <%= f.label :Tracker %><br />
+    <%= f.text_field :tracker %>
+  </div>
+ <div class="field">
+    <%= f.label :Status %><br />
+    <%= f.text_field :status %>
+  </div>
+ <div class="field">
+    <%= f.label :Priority %><br />
+    <%= f.text_field :priority %>
+  </div>
+ <div class="field">
+    <%= f.label :Order %><br />
+    <%= f.text_field :order %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

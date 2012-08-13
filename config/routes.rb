@@ -95,10 +95,14 @@ RedmineApp::Application.routes.draw do
       post 'unarchive'
       match 'copy', :via => [:get, :post]
     end
- resources :iterations do 
-    resources :stories do
-      resources :tasks 
-    end
+	 resources :iterations do 
+		resources :stories do
+		  resources :tasks do
+			   member do
+					put 'update' 
+			   end
+		  end 
+		end
   end
 
     resources :memberships, :shallow => true, :controller => 'members', :only => [:index, :show, :create, :update, :destroy] do
