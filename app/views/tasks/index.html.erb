@@ -29,6 +29,8 @@
 					<%=  ts.description %>
 				</td><td width ="400px">
 					<%#=  link_to "update", edit_project_iteration_story_task_path(pro,@iteration.id,@story.id,ts.id)%>
+		<%#= link_to 'Destroy', project_iteration_story_tasks_path(pro.id,@iteration.id,@story.id,ts.id),:confirm => 'Are you sure?', :method => :delete %>
+
 				</td>
 			</tr>
 	     <% end %>

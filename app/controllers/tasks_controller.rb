@@ -21,7 +21,7 @@ def create
 
 	@user.each do |usr|
 		if @task.acceptor == usr.lastname
-		@usermail = usr.mail
+		@usermail = usr
 		
 		end
         end 
@@ -59,5 +59,12 @@ def show
   @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
  @task = @story.tasks.find(params[:id])
+end
+def destroy
+@project = Project.find(params[:project_id])
+@iteration = Iterations.find(params[:iteration_id])
+@story = Story.find(params[:story_id])
+@task=@story.tasks.find(params[:id])
+@task.destroy
 end
 end
