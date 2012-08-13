@@ -5,7 +5,6 @@
 <% @pro_id = em.project_id %>
 	<% @myprojects = Project.find(:all, :conditions => {:id => @pro_id}) %>
 	<% @myprojects.each do |pro| %>
-    
 		<b><%= link_to pro.name, project_path(pro.id) %></b>
                <% pro.iteration.each do |iter| %>
 			<p> <b><%#= iter.name %></b></p>
