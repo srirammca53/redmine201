@@ -22,7 +22,7 @@
 			</tr>
 	     <% end %>
 </table>
-
+<% if User.current.admin? %>
 <%= link_to "create story" , new_project_iteration_story_path(@project.id, @iteration.id) %>
-
+<% end %>
 

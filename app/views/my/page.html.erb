@@ -5,13 +5,14 @@
 <% @pro_id = em.project_id %>
 	<% @myprojects = Project.find(:all, :conditions => {:id => @pro_id}) %>
 	<% @myprojects.each do |pro| %>
+    
 		<b><%= link_to pro.name, project_path(pro.id) %></b>
                <% pro.iteration.each do |iter| %>
-			<p>Iteration name:  <b><%= iter.name %></b></p>
+			<p> <b><%#= iter.name %></b></p>
 			<% iter.story.each do |story| %>
-				<p> User story :  <b><%= story.name%></b></p>
+				<p><b><%#= story.name%></b></p>
 					<% story.tasks.each do |task| %>
-						<p>Task:<b><%= task.name %></b></p>
+						<p><b><%= task.name %></b></p>
 					<%end %>		
 			<% end %>
 		<% end %>

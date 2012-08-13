@@ -1,4 +1,4 @@
-<table border="1">
+<table >
 	<h2> <%= @project.name %> </h2>
 		<p><b>List of Iterations</b></p>
 	
@@ -22,8 +22,10 @@
 				<td width ="500px">
 					<%= it.description %>
 				</td>
+  					<td><%#= link_to "update", edit_project_iteration_path(@project.id,it.id) %></td>
 			</tr>
 	     <% end %>
 </table>
+<% if User.current.admin? %>
 <%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
-
+<% end %>

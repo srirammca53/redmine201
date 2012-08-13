@@ -97,7 +97,7 @@ RedmineApp::Application.routes.draw do
     end
  resources :iterations do 
     resources :stories do
-      resources :tasks
+      resources :tasks 
     end
   end
 
