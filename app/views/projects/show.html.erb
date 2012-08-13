@@ -74,11 +74,10 @@
       <% end %>
       <% if User.current.allowed_to?(:view_gantt, @project, :global => true) %>
         <%#= link_to(l(:label_gantt), :controller => 'gantts', :action => 'show', :project_id => @project) %>
-	 <%= link_to "iterations", project_iterations_path(@project.id)  %>
-      <% end %>
-   
+      <% end %> 
   </div>
   <% end %>
+  <%= link_to "iterations", project_iterations_path(@project.id)  %>
   <%= call_hook(:view_projects_show_left, :project => @project) %>
 </div>
 

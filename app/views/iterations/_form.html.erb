@@ -9,11 +9,13 @@
   </div>
   <div class="field">
     <%= f.label :Start_date %><br />
-    <%= f.date_select :start_date %>
+    <%#= f.date_select :start_date %>
+    <%= f.text_field :start_date, :id => :popupDatepicker %>
   </div>
   <div class="field">
     <%= f.label :End_date %><br />
-    <%= f.date_select :end_date %>
+    <%#= f.date_select :end_date %>
+    <%= f.text_field :end_date, :id => :popupDatepicker1 %>
   </div>
    <div class="field">
     <%= f.label :Status %><br />
@@ -30,3 +32,11 @@
 </tr>
  </table>
 </html>
+ <script>
+$(function() {
+	$('#popupDatepicker').datepick({dateFormat: 'yyyy-mm-dd'});
+	
+	$('#popupDatepicker1').datepick({dateFormat: 'yyyy-mm-dd'});
+});
+
+</script>
