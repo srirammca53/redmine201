@@ -34,8 +34,8 @@
 				
 				<td width ="100px">
 					<%#@log = Log.find(:all, :conditions=>{ts.id => @log.id}) %>
-					
-				</td>
+					<% @logs.each do |lg|  %>   <% if ts.id.to_i == lg.task_id.to_i %>    <%= lg.spent_hours %> <% end %> <% end %>
+				</td>	
 				<td width ="100px">
 					<%=  ts.description %>
 				</td>
