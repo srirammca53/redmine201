@@ -16,6 +16,8 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 RedmineApp::Application.routes.draw do
+
+
   root :to => 'myprojects#index', :as => 'home'
   resources :myprojects
   match 'login', :to => 'account#login', :as => 'signin'
@@ -86,7 +88,11 @@ RedmineApp::Application.routes.draw do
   match 'watchers/autocomplete_for_user', :controller=> 'watchers', :action => 'autocomplete_for_user', :via => :get
 
   match 'projects/:id/settings/:tab', :to => "projects#settings"
- 
+  
+
+  
+     
+  
   resources :projects do
     member do
       get 'settings'
@@ -101,6 +107,7 @@ RedmineApp::Application.routes.draw do
 			   member do
 					put 'update' 
 			   end
+			resources :logs
 		  end 
 		end
   end

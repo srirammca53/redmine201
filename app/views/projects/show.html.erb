@@ -32,7 +32,9 @@
 			<td width="100px"><%= task.estimated_hours %></td>
 			<td width="100px"><%= task.acceptor %></td>
 			<td width="200px"><%= task.description %></td>
+
 			</tr>
+			
                        
  			<% end %>
 		<% end %>
@@ -96,10 +98,10 @@
 
 <% content_for :sidebar do %>
     <% if @total_hours.present? %>
-    <h3><%#= l(:label_spent_time) %></h3>
+   <!-- <h3><%#= l(:label_spent_time) %></h3>
     <p><%#=span class="icon icon-time"%><%#= l_hours(@total_hours) %></span></p>
     <p><%#= link_to(l(:label_details), project_time_entries_path(@project)) %> 
-    <%#= link_to(l(:label_report), report_project_time_entries_path(@project)) %></p>
+    <%#= link_to(l(:label_report), report_project_time_entries_path(@project)) %></p>-->
     <% end %>
     <%#= call_hook(:view_projects_show_sidebar_bottom, :project => @project) %>
 <% end %>
