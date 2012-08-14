@@ -26,13 +26,27 @@ end
 
 
 def show
-@project = Project.find(params[:project_id])
-@iteration = Iteration.find(params[:iteration_id])
- @story = @iteration.story.find(params[:id])
-end
-def edit
 	@project = Project.find(params[:project_id])
-   @iteration = Iteration.find(params[:iteration_id])
-   @story = @iteration.story.find(params[:id])
+	@iteration = Iteration.find(params[:iteration_id])
+	 @story = @iteration.story.find(params[:id])
 end
+
+def edit
+   @project = Project.find(params[:project_id])
+    @iteration = @project.iteration.find(params[:iteration_id])
+    @story = @iteration.story.find(params[:id])
+end
+
+def update
+   @project = Project.find(params[:project_id])
+    @iteration = @project.iteration.find(params[:iteration_id])
+    @story = @iteration.story.find(params[:id])
+	
+    if @story.update_attributes(params[:story])
+        render :action => "show"
+    else
+		 render :action => "edit"
+    end
+  end
+  
 end

@@ -21,14 +21,12 @@ def create
 
 	@user.each do |usr|
 		if @task.acceptor == usr.lastname
-		@usermail = usr.mail
+		@usermail = usr
 		
 		end
         end 
 	if @task.save 
-	
-	
-	TaskMailer.task_creation(@usermail).deliver
+	   TaskMailer.task_creation(@usermail).deliver
 	end
     render :action => "show"
 end
