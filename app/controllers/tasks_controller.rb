@@ -43,8 +43,15 @@ def update
     @iteration = @project.iteration.find(params[:iteration_id])
     @story = @iteration.story.find(params[:story_id])
     @task = @story.tasks.find(params[:id])
- 
+ 	@user = User.find(:all)
+ 	@user.each do |usr|
+		if @task.acceptor == usr.lastname
+		@usermail = usr
+		
+		end
+        end 
     if @task.update_attributes(params[:task])
+	TaskMailer.task_update(@usermail).deliver
         render :action => "show"
     else
 		 render :action => "edit"
