@@ -1,0 +1,14 @@
+<html>
+<table border="1" >
+<tr>
+<%= form_for @log, :url => {:action => :create, :id => @task_id } do |f| %>
+ <div class="field">
+    <%= f.label :spent_hours %><br />
+    <%= f.text_field :spent_hours %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
