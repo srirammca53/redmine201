@@ -30,5 +30,10 @@
     <%= f.submit %>
   </div>
 <% end %>
-
-
+<script>
+$(function(){
+    $('#test-1').timepickr({
+        handle: '#trigger-test'
+        convention: 12 });
+})
+</script>

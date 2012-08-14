@@ -14,12 +14,12 @@
   <div class="field">
     <%= f.label :Start_date %><br />
     <%#= f.date_select :start_date %>
-    <%= f.text_field :start_date, :id => :popupDatepicker %>
+    <%= f.text_field :start_date, :value => @iteration.start_date.strftime("%Y-%d-%m"),:id => :popupDatepicker %>
   </div>
   <div class="field">
     <%= f.label :End_date %><br />
     <%#= f.date_select :end_date %>
-    <%= f.text_field :end_date, :id => :popupDatepicker1 %>
+    <%= f.text_field :end_date, :value => @iteration.end_date.strftime("%Y-%d-%m"), :id => :popupDatepicker1%>
   </div>
    <div class="field">
     <%= f.label :Status %><br />
