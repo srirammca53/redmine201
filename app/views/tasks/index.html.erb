@@ -8,8 +8,7 @@
 			<th width ="100px">Acceptor</th>
 			<th width ="100px">Estimation time</th>
 			<th width ="400px">Description</th>
-			<th width ="400px">Edit</th>		
-			<th width ="400px">Delete</th>
+			
 
 		</tr>
 		<%@story.tasks.each do |ts| %>
@@ -27,8 +26,6 @@
 					<%=  ts.estimated_hours %>
 				</td><td width ="400px">
 					<%=  ts.description %>
-				</td><td width ="400px">
-					<%#=  link_to "update", edit_project_iteration_story_task_path(pro, @iteration.id,@story.id,ts.id)%>
 				</td>
 				<td width ="400px">
 					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
