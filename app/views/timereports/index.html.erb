@@ -1,5 +1,29 @@
-<%= @project.name %>
-<%= @iteration.name %>
-<%= @story.name %>
-<% @task.name %>
-<%= link_to "reports", new_project_iteration_story_task_timereport_path(@project.id,@iteration.id,@story.id,@task.id) %>
+<h1>Listing timereports</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @timereports.each do |timereport| %>
+  <tr>
+    <td><%= timereport.user %></td>
+    <td><%= timereport.start_date %></td>
+    <td><%= timereport.end_date %></td>
+    <td><%= timereport.user %></td>
+    <td><%= link_to 'Show', timereport %></td>
+    <td><%= link_to 'Edit', edit_timereport_path(timereport) %></td>
+    <td><%= link_to 'Destroy', timereport, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Timereport', new_timereport_path %>

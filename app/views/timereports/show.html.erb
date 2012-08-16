@@ -1,0 +1,20 @@
+
+<table>
+<tr>
+  <td>User:</td>
+  <td><%= @timereport.user %></td>
+
+
+  <td>Start date:</td>
+  <td><%= @timereport.start_date %></td>
+
+  <td>End date:</td>
+  <td><%= @timereport.end_date %></td>
+
+  <td><b>User:</td>
+ <td> <%= @timereport.user %></td>
+</tr>
+</table>
+
+<%= link_to 'Edit', edit_timereport_path(@timereport) %> |
+<%= link_to 'Back', timereports_path %>
