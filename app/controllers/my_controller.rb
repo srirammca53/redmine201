@@ -44,6 +44,7 @@ class MyController < ApplicationController
   # Show user's page
   def page
     @user = User.current
+   # @project = Project.find(params[:project_id])
     @blocks = @user.pref[:my_page_layout] || DEFAULT_LAYOUT
     @projects = Project.find(:all)
  @user = User.current
