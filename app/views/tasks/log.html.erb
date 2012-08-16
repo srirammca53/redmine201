@@ -1,4 +1,4 @@
-<%= form_tag 'tasks/log' do %>
+
     <table>
     <tr>
 		<th>
@@ -14,22 +14,30 @@
 	<tr>
     <td>
 		<%#= text_field_tag :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%>
-		<%= text_field_tag    :onchange => "myFunction()",  :id => "log_spent_hours" %>
+		<%#= text_field_tag 'request',1, :id => "log_spent_hours", :onchange=> "myFunction()" %>
+		<%= text_field_tag 'log spent hours',0, :onchange=> "myFunction()"  %>
 
     </td>
     <td>  
     <script>
 			function myFunction()
 			{
-				  var current_ele = $("log_spent_hours").value;
-				  var actua_value = $("payment_amount").value;
+				var current_ele = $("#log_spent_hours").val();
+				 var actua_value = $("#payment_amount").val();
+				 
+				  if(current_ele < parseInt(actua_value))
+				  { 
+					   var remaining_value = actua_value-current_ele
+					   $("#remaining_time").val(remaining_value); 
+				   }
+				   else
+				  {
+					alert("hey you exceeded actuall value"); 
+				  }
 
-				  remaining_value = actua_value-current_ele
-				   $("remaining_time").value = remaining_value;
-				   
 			 }
 	</script>  
-		<%= text_field_tag 'remaining time', 0, :disabled => true %>
+		<%= text_field_tag 'remaining time',0, :disabled => true %>
 	</td>
 
     <td>    
@@ -37,6 +45,6 @@
 	</td>
 	</tr>
 	</table>
-<% end %>
+
 
    
