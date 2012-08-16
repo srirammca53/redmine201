@@ -106,6 +106,7 @@ RedmineApp::Application.routes.draw do
 		  resources :tasks do
 			   member do
 					put 'update' 
+					get 'log'
 			   end
 			resources :logs
 		  end 

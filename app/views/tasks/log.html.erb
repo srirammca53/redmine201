@@ -1,5 +1,4 @@
-	
-<%= form_for @log, :url => {:action => :create, :id => @task_id } do |f| %>
+<%= form_tag 'tasks/log' do %>
     <table>
     <tr>
 		<th>
@@ -14,7 +13,9 @@
 	</tr>
 	<tr>
     <td>
-		<%= f.text_field :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%>
+		<%#= text_field_tag :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%>
+		<%= text_field_tag    :onchange => "myFunction()",  :id => "log_spent_hours" %>
+
     </td>
     <td>  
     <script>
@@ -36,8 +37,6 @@
 	</td>
 	</tr>
 	</table>
-    <%= f.submit %>
 <% end %>
-
 
    

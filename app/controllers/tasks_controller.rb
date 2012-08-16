@@ -72,5 +72,12 @@ def delete
    raise "demo".inspect
 end
 
-
+def log
+	
+	@project = Project.find(params[:project_id])
+  @iteration = Iteration.find(params[:iteration_id])
+  @story = Story.find(params[:story_id])
+ @task = @story.tasks.find(params[:id])
+ render :layout => false
+end
 end

@@ -1,4 +1,5 @@
-
+<%= stylesheet_link_tag('colorbox')%>
+<%= javascript_include_tag('jquery.min', 'jquery.colorbox')%>
 <table >
 		<p><b>List of Tasks</b></p>
 		<tr >
@@ -12,8 +13,6 @@
 			<th width ="100px">Remaining hours</th>
 			<th width ="50px"></th>
 			<th width ="50px"></th>
-			
-
 		</tr>
 		<%@story.tasks.each do |ts| %>
 			<tr  align="center">
@@ -43,7 +42,7 @@
 					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
 				</td>
 				<td width ="50px">
-					<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ), new_project_iteration_story_task_log_path(pro.id,@iteration.id,@story.id,ts.id) %>
+					<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),  log_project_iteration_story_task_path(pro.id, @iteration.id, @story.id, ts.id), :class=> "updatetime" %>
 				</td>
 			</tr>
 	     <% end %>
@@ -52,4 +51,7 @@
 <%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 <% end %>
 
-
+<%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
+<script>
+	$('.updatetime').colorbox();
+</script>
