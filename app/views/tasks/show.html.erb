@@ -1,3 +1,4 @@
+<%= @task.id%>
 <html>
 <p> Task : <h2><%= @task.name %></h2></p>
 <table>
@@ -51,8 +52,6 @@ description
 <%= @task.description %>
 </td>
 </tr>
-
-
 </table>
 <hr/>
 <%#= @project.id.inspect%>
@@ -60,4 +59,4 @@ description
 <%#= @project.inspect%>
 <%= link_to "tasks index page", project_iteration_story_tasks_path%>
 <%= link_to "back to index page", projects_path%>
- <%#= link_to "reports" , project_iteration_story_task_timereports_path(@project.id,@iteration.id,@story.id,@task.id) %>
+ <%= link_to "reports" , project_iteration_story_task_timereports_path(@project.id, @iteration.id, @story.id, @task.id) %>

@@ -1,19 +1,23 @@
+
 <%= form_for(@timereport) do |f| %>
-  <table> 
-   <tr>
-<td> <%= f.label :user %> : </td>
-<td> <%= f.text_field :user %></td>
-
-  
-    <td><%= f.label :start_date %> : </td>
-   <td> <%= f.date_select :start_date %> </td>
-
-   <td> <%= f.label :end_date %> : </td>
-   <td> <%= f.date_select :end_date %> </td>
-</tr>
-</table>
-
+ <%= f.label :user %> : <br>
+ <%= f.text_field :user %><br>
+  <%= f.label :start_date %> : <br>
+ <%#= f.date_select :start_date %> 
+     <%= f.text_field :start_date, :id => :popupDatepicker%>
+<br>
+<%= f.label :end_date %> : <br>
+     <%= f.text_field :end_date, :id => :popupDatepicker1 %>
+ <br>
   <div class="actions">
     <%= f.submit  "Report"%>
   </div>
 <% end %>
+ <script>
+$(function() {
+	$('#popupDatepicker').datepick({dateFormat: 'yyyy-mm-dd'});
+	
+	$('#popupDatepicker1').datepick({dateFormat: 'yyyy-mm-dd'});
+});
+
+</script>

@@ -2,9 +2,9 @@ class TimereportsController < ApplicationController
 
   def index
     @project = Project.find(params[:project_id])
-    @iteration = @project.iterations.find(params[:iteration_id])
+    @iteration = @project.iteration.find(params[:iteration_id])
     @story = @iteration.story.find(params[:story_id])
-    @task = @iteration.tasks.find(params[:task_id])
+    @task = @story.tasks.find(params[:task_id])
     @timereports = Timereport.all
   end
 
@@ -23,6 +23,7 @@ class TimereportsController < ApplicationController
   end
 
   def create
+
     @timereport = Timereport.new(params[:timereport])
 
     respond_to do |format|
