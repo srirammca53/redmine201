@@ -45,13 +45,13 @@ class User < Principal
   ]
 
   has_and_belongs_to_many :groups, :after_add => Proc.new {|user, group| group.user_added(user)},
-                                   :after_remove => Proc.new {|user, group| group.user_removed(user)}
+                                    :after_remove => Proc.new {|user, group| group.user_removed(user)}
   has_many :changesets, :dependent => :nullify
   has_one :preference, :dependent => :destroy, :class_name => 'UserPreference'
   has_one :rss_token, :class_name => 'Token', :conditions => "action='feeds'"
   has_one :api_token, :class_name => 'Token', :conditions => "action='api'"
   belongs_to :auth_source
-
+  has_many :timereports
   # Active non-anonymous users scope
   scope :active, :conditions => "#{User.table_name}.status = #{STATUS_ACTIVE}"
   scope :logged, :conditions => "#{User.table_name}.status <> #{STATUS_ANONYMOUS}"

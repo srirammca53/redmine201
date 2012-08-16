@@ -1,0 +1,5 @@
+<%= @project.name %>
+<%= @iteration.name %>
+<%= @story.name %>
+<% @task.name %>
+<%= link_to "reports", new_project_iteration_story_task_timereport_path(@project.id,@iteration.id,@story.id,@task.id) %>

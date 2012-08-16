@@ -4,7 +4,7 @@ def index
   @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
   @tasks = Task.find(:all)
-
+	@logs = Log.find(:all)
 end
 
 def new

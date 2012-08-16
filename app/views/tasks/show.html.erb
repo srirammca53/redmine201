@@ -60,3 +60,4 @@ description
 <%#= @project.inspect%>
 <%= link_to "tasks index page", project_iteration_story_tasks_path%>
 <%= link_to "back to index page", projects_path%>
+ <%= link_to "reports" , project_iteration_story_task_timereports_path(@project.id,@iteration.id,@story.id,@task.id) %>

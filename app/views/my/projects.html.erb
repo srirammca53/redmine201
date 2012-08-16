@@ -1,0 +1,31 @@
+<h2><b><u>My Projects</u></b></h2>
+<hr/>
+
+<% @member.each do |em| %>
+<% @pro_id = em.project_id %>
+	<% @myprojects = Project.find(:all, :conditions => {:id => @pro_id}) %>
+	<% @myprojects.each do |pro| %>
+		<b><%= link_to pro.name, project_path(pro.id) %></b>
+               <% pro.iteration.each do |iter| %>
+			<p> <b><%#= iter.name %></b></p>
+			<% iter.story.each do |story| %>
+				<p><b><%#= story.name%></b></p>
+					<% story.tasks.each do |task| %>
+						<p><b><%= task.name %></b></p>
+					<%end %>		
+			<% end %>
+		<% end %>
+	<% end %>
+
+
+
+<br/>
+	<% @iteration = Iteration.find(:all, :conditions => {:project_id => @pro_id})%>
+	<% @iteration.each do |iter|%>
+		<%#= iter.name%>
+	<%end%>	<br>
+<% end %>
+
+
+
+

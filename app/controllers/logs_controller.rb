@@ -78,4 +78,14 @@ end
       format.json { head :no_content }
     end
   end
+
+def filter
+@project = Project.find(params[:project_id])
+@iteration = @project.iteration.find(params[:iteration_id])
+@story = @iteration.story.find(params[:story_id])
+@task = @story.tasks.find(params[:task_id])
+
+
+raise "filter".inspect
+end
 end
