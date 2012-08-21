@@ -1,43 +1,10 @@
-	
-<%= form_for @log, :url => {:action => :create, :id => @task_id } do |f| %>
-    <table>
-    <tr>
-		<th>
-			Change value
-		</th>
-		 <th>
-			Remaining value
-		</th>
-		 <th>
-			Actual Value
-		</th>
-	</tr>
-	<tr>
-    <td>
-		<%= f.text_field :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%>
-    </td>
-    <td>  
-    <script>
-			function myFunction()
-			{
-				  var current_ele = $("log_spent_hours").value;
-				  var actua_value = $("payment_amount").value;
-
-				  remaining_value = actua_value-current_ele
-				   $("remaining_time").value = remaining_value;
-				   
-			 }
-	</script>  
-		<%= text_field_tag 'remaining time', 0, :disabled => true %>
-	</td>
-
-    <td>    
-		<%= text_field_tag 'payment_amount', @task.estimated_hours, :disabled => true %>
-	</td>
-	</tr>
-	</table>
-    <%= f.submit %>
-<% end %>
-
-
-   
+<%= form_tag @logs do |f| %>
+<%= f.text_field :report_date%>
+<%= f.text_field :spent_hours%>
+<%= f.text_field :remaining_time%>
+<%= f.text_field :estimated_time%>
+<%= f.text_field :task_id%>
+<%= f.text_field :user1%>
+<%= f.text_field :user2%>
+<%f.submit%>
+<%end%> 

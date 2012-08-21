@@ -106,16 +106,7 @@ RedmineApp::Application.routes.draw do
 	 resources :iterations do 
 		resources :stories do
 		  resources :tasks do
-		resources :timereports
-			   member do
-					put 'update' 
-					get 'log'
-			   end
-			resources :logs do 
-				collection do 
-					get 'filter'
-				end
-				end
+			resources :logs 	
 		  end 
 		end
   end
