@@ -61,7 +61,7 @@ end
 
 
 def show
-@project = Project.find(params[:project_id])
+  @project = Project.find(params[:project_id])
   @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
  @task = @story.tasks.find(params[:id])
@@ -73,11 +73,11 @@ def delete
 end
 
 def log
-	
-	@project = Project.find(params[:project_id])
-  @iteration = Iteration.find(params[:iteration_id])
-  @story = Story.find(params[:story_id])
- @task = @story.tasks.find(params[:id])
+ redirect_to :controller=> :logs, :action => :new
  render :layout => false
+end
+def create_logs
+	
+	raise "hi"
 end
 end

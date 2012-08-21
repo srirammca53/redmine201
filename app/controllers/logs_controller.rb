@@ -10,19 +10,24 @@ class LogsController < ApplicationController
 end
 
 def new
- @task = Task.find(params[:task_id])
+    @task = Task.find(params[:task_id])
+    @logs = Log.new
 
-  @log = @task.logs.new
-
+ render :layout => false
 end
 
 def create
-    @user = User.find(:all)
-    @task = Task.find(params[:task_id])
-    @log = @task.logs.create(params[:log])
-
-	
-    render :action => "show"
+    @project = Project.find(params[:project_id])
+    @iteration = @project.iteration.find(params[:iteration_id])
+    @story = @iteration.story.find(params[:story_id])
+    @task = @story.tasks.find(params[:task_id])
+    @log = @task.logs.build(params[:logs])
+   
+    if @log.save 
+		 render :action => "new"
+		else
+		raise "bad"
+    end
 end
 
 def show

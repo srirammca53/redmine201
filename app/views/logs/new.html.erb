@@ -1,1 +1,50 @@
-<%= render 'form' %>
+
+    <table>
+    <tr>
+		<th>
+			Change value
+		</th>
+		 <th>
+			Remaining value
+		</th>
+		 <th>
+			Actual Value
+		</th>
+	</tr>
+	<tr>
+    <td>
+		<%#= text_field_tag :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%>
+		<%#= text_field_tag 'request',1, :id => "log_spent_hours", :onchange=> "myFunction()" %>
+		<%= text_field_tag 'log spent hours',0, :onchange=> "myFunction()"  %>
+
+    </td>
+    <td>  
+    <script>
+			function myFunction()
+			{
+				var current_ele = $("#log_spent_hours").val();
+				 var actua_value = $("#payment_amount").val();
+				 
+				  if(current_ele < parseInt(actua_value))
+				  { 
+					   var remaining_value = actua_value-current_ele
+					   $("#remaining_time").val(remaining_value); 
+				   }
+				   else
+				  {
+					alert("hey you exceeded actuall value"); 
+				  }
+
+			 }
+	</script>  
+		<%= text_field_tag 'remaining time',0, :disabled => true %>
+	</td>
+
+    <td>    
+		<%= text_field_tag 'payment_amount', @task.estimated_hours, :disabled => true %>
+	</td>
+	</tr>
+	</table>
+
+
+   
