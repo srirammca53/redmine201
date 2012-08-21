@@ -17,6 +17,7 @@ def new
 end
 
 def create
+
     @project = Project.find(params[:project_id])
     @iteration = @project.iteration.find(params[:iteration_id])
     @story = @iteration.story.find(params[:story_id])

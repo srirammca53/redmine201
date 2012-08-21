@@ -15,7 +15,7 @@
     <td>
 		<%#= text_field_tag :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%>
 		<%#= text_field_tag 'request',1, :id => "log_spent_hours", :onchange=> "myFunction()" %>
-		<%= text_field_tag 'log spent hours',0, :onchange=> "myFunction()"  %>
+		<%= text_field_tag 'log spent hours',0, :onchange=> "myFunction()"%>
 
     </td>
     <td>  
@@ -35,6 +35,10 @@
 					alert("hey you exceeded actuall value"); 
 				  }
 
+				 $("#spent").value= current_ele
+				var spent =  $("#spent").value
+				alert(spent);
+				
 			 }
 	</script>  
 		<%= text_field_tag 'remaining time',0, :disabled => true %>
@@ -42,6 +46,8 @@
 
     <td>    
 		<%= text_field_tag 'payment_amount', @task.estimated_hours, :disabled => true %>
+		
+
 	</td>
 	</tr>
 	</table>
