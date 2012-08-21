@@ -2,29 +2,49 @@ class LogsController < ApplicationController
   # GET /logs
   # GET /logs.json
  def index
-  @project = Project.find(params[:project_id])
-  @iteration = Iteration.find(params[:iteration_id])
-  @story = Story.find(params[:story_id])
+  
   @tasks = Task.find(:all)
   @logs = Logs.find(:all)
 end
 
 def new
+
     @task = Task.find(params[:task_id])
-    @logs = Log.new
+    @log = @task.logs.new
 
  render :layout => false
 end
 
 def create
-    @project = Project.find(params[:project_id])
-    @iteration = @project.iteration.find(params[:iteration_id])
-    @story = @iteration.story.find(params[:story_id])
-    @task = @story.tasks.find(params[:task_id])
-    @log = @task.logs.build(params[:logs])
+    
+    @task = Task.find(params[:task_id]) # task id
+    @st = Story.find(:all, :conditions => {:id => @task.story_id})
+    @st.each do |st|
+     @stid = st.id # story id
+    @stit_id = st.iteration_id 
+ 
+	end
+	
+	
+ @it = Iteration.find(:all, :conditions => {:id => @stit_id})
+
+  @it.each do |it|
+   @itid =it.id # iteration id
+    @itpro_id = it.id 
+	
+	end
+   
+  @proid = Project.find(:all, :conditions => {:id =>  @itpro_id})
+
+   @proid.each do |pro|
+    @pro_id = pro.id   # project id 
+	end
+	 
+    @log = @task.logs.build(params[:log])
    
     if @log.save 
-		 render :action => "new"
+        #raise "hi"
+		redirect_to project_iteration_story_tasks_path( @pro_id, @itid, @stid )
 		else
 		raise "bad"
     end
