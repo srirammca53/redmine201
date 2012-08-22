@@ -23,7 +23,20 @@
   </div>
    <div class="field">
     <%= f.label :Status %><br />
-   <%= f.text_field :status %>
+   <%= f.label :Status %><br />
+
+  <% @project.iteration.each do |it| %>
+	  <%if it.status == "Open" %>
+	   <% @flag = @flag.to_i + 1 %> 
+	  <% end %>
+  <% end %>
+
+  <% if @flag == 0 %>
+ <%= f.select(:status, options_for_select(["Planned","Open", "Closed", "Locked"])) %>
+    <% else %>
+<% flash[:error] = "One Iteration in this project is already opened " %>
+ <%= f.select(:status, options_for_select(["Planned", "Closed", "Locked"])) %>
+ <% end %>
   </div>
   <div class="field">
     <%= f.label :Description %><br />

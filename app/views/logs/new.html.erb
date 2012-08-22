@@ -1,9 +1,12 @@
-<%= form_for [@task, @task.logs.build] do |f| %>
-	<%= f.text_field :report_date%><br>
-	<%= f.text_field :spent_hours%><br>
-	<%= f.text_field :remaining_time%><br>
-	<%= f.text_field :estimated_time%><br>
-	<%= f.text_field :user1%><br>
-	<%= f.text_field :user2%><br>
-	<%= f.submit %>
-<%end%>
+ssssssssssss<br/>
+<%= @task.id %>
+<% if @log.spent_hours == 0 %>
+
+<%= @task.create_log(:spent_hours => @log.spent_hours) %>
+<% end %>
+<% if @log.spent_hours != 0 %>
+<% @spent = params[:spent_hours] %>
+<% @log.spent_hours=@log.spent_hours.to_i + @spent.to_i %>
+<%= @task.log.update_attributes(:spent_hours => 3) %>
+<% end %>
+

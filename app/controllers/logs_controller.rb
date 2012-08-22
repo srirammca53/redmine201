@@ -8,10 +8,9 @@ class LogsController < ApplicationController
 end
 
 def new
-
+   
     @task = Task.find(params[:task_id])
-    @log = @task.logs.new
-
+    @log = Log.new(params[:logs])
  render :layout => false
 end
 
@@ -22,7 +21,7 @@ def create
     @st.each do |st|
      @stid = st.id # story id
     @stit_id = st.iteration_id 
- 
+     
 	end
 	
 	
@@ -30,16 +29,17 @@ def create
 
   @it.each do |it|
    @itid =it.id # iteration id
-    @itpro_id = it.id 
-	
+    @itpro_id = it.project_id 
+
 	end
    
   @proid = Project.find(:all, :conditions => {:id =>  @itpro_id})
-
+ 
    @proid.each do |pro|
+
     @pro_id = pro.id   # project id 
 	end
-	 
+	    
     @log = @task.logs.build(params[:log])
    
     if @log.save 
