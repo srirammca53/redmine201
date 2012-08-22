@@ -1,5 +1,7 @@
+<%= javascript_include_tag('jquery.min', 'jquery.datepick')%>
+<%= stylesheet_link_tag('jquery.datepick')%>
 <%= form_for [@task, @task.logs.build] do |f| %>
-	Reported Date: <%= f.text_field :report_date%><br>
+	Reported Date: <%= f.text_field :report_date, :id => :popupDatepicker%><br>
 	Spent Hours: <%= f.text_field :spent_hours%><br>
 	Remaining Time: <%= f.text_field :remaining_time%><br>
 	Estimated Time: <%= f.text_field :estimated_time%><br>
@@ -7,3 +9,10 @@
 	User Two: <%= f.text_field :user2%><br>
 	<%= f.submit %>
 <%end%>
+ <script>
+$(function() {
+	$('#popupDatepicker').datepick({dateFormat: 'yyyy-mm-dd'});
+	
+});
+
+</script>
