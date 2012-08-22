@@ -1,0 +1,14 @@
+<% @flag = 0 %>
+
+<% @tid = Task.find(:all)%>
+<%@tid.each do |taskmain|%>
+	<% if taskmain.acceptor == User.current.lastname%>
+		<%=taskmain.name%><br>
+		<%else%>
+		 <% @flag = @flag.to_i + 1 %>
+	<%end%>
+	<% if @flag == 1 %>
+	<p> Sorry "<%= User.current.lastname%>" no tasks for you</p>
+	<% end %>
+<%end%>
+

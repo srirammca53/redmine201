@@ -50,7 +50,6 @@
 <% if User.current.admin? %>
 <%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 <% end %>
-
 <%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 <script>
 	$('.updatetime').colorbox();
