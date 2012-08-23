@@ -3,6 +3,7 @@
 <div class="box tabular">
 <!--[form:project]-->
 <p><%= f.text_field :name, :required => true, :size => 60 %></p>
+<p><%= f.text_field :estimation_time, :required => true, :size => 60 %></p>
 
 <% unless @project.allowed_parents.compact.empty? %>
     <p><%= label(:project, :parent_id, l(:field_parent)) %><%= parent_project_select_tag(@project) %></p>

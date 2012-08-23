@@ -618,7 +618,9 @@ class Project < ActiveRecord::Base
     'custom_field_values',
     'custom_fields',
     'tracker_ids',
+    'estimation_time',
     'issue_custom_field_ids'
+  
 
   safe_attributes 'enabled_module_names',
     :if => lambda {|project, user| project.new_record? || user.allowed_to?(:select_project_modules, project) }
