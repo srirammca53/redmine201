@@ -1,4 +1,7 @@
 <html>
+
+<% @flag = 0 %>
+
 <p> New Iteration for <b><%= @project.name %></b> </p>
 <table border="1" >
 <tr>
@@ -22,7 +25,9 @@
   </div>
    <div class="field">
     <%= f.label :Status %><br />
-   <%= f.text_field :status %>
+ <%= f.select(:status, options_for_select(["Planned","Open", "Closed", "Locked"])) %>
+
+
   </div>
   <div class="field">
     <%= f.label :Description %><br />
@@ -34,6 +39,7 @@
 <% end %>
 </tr>
  </table>
+
 </html>
  <script>
 $(function() {
