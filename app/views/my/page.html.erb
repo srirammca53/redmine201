@@ -1,75 +1,38 @@
-<table border =1>
-<tr>
-	<th>
-	  Task Name
-	</th>
-	<th>
-	  Iteration Name
-	</th>
-	<th>
-	  Project Name Name
-	</th>
-	<th>
-	  Spent Hours
-	</th>
-	<th>
-		Remaining Time
-	</th>
-	<th>
-	  Estimated Time
-	</th>
-	<th>
-	</th>
-</tr>
+
 <% @flag = 0 %>
-
 <% @tid = Task.find(:all)%>
+<%#= @tid.count %>
+
+<table>
+<tr>
+<th>Task name</th>
+<th>Story name</th>
+<th>Iteration name</th>
+<th>Project name </th>
+</tr>
 <%@tid.each do |taskmain|%>
+<tr>
 	<% if taskmain.acceptor == User.current.lastname%>
-	<tr>
-		<td>
-				<%=taskmain.name%><br>
-		</td>
-		<td>
-			<% @usid = Story.find(:all, :conditions => {:id => taskmain.story_id})%>
-			<% @usid.each do |us|%>
-				<%@itid = Iteration.find(:all, :conditions => {:id => us.id})%>
-					<%@itid.each do |iterationname|%>
-						<%= iterationname.name%>
-					<%end%>
-				<%end%>
-		</td>
-		<td>
-			<% @usid = Story.find(:all, :conditions => {:id => taskmain.story_id})%>
-			<% @usid.each do |us|%>
-				<%@itid = Iteration.find(:all, :conditions => {:id => us.id})%>
-					<%@itid.each do |iterationname|%>
-						<%@pid = Project.find(:all, :conditions => {:id => iterationname.id})%>
-							<%@pid.each do |pname|%>
-								<%=pname.name%>
-							<%end%>
-					<%end%>
-				<%end%>
-		</td>
-		
-		<td>
-			jkhk
-		</td>
-
-		<td>
-			<% if taskmain.acceptor == User.current.lastname%>
-			<td><%=taskmain.estimated_hours%><br></td>
-			<%else%>
-			 <% @flag = @flag.to_i + 1 %>
-		<%end%>
-		</td>
-				<%else%>
-			 <% @flag = @flag.to_i + 1 %>
-		<%end%>
-		<% if @flag == 1 %>
-			<p> Sorry "<%= User.current.lastname%>" no tasks for you</p>
+        
+	<td> <%=taskmain.name%><br></td>
+        <% @user_story = Story.find(:all, :conditions => {:id => taskmain.story_id }) %>
+		<% @user_story.each do |st| %>
+	    	<td>  <%= st.name %></td>
+		 <% @iteration = Iteration.find(:all, :conditions => {:id => st.iteration_id }) %>
+			<% @iteration.each do |it| %>
+			<td> <%= it.name %></td>
+			 	<% @projects.each do |pro| %>
+					<% if pro.id == it.project_id %>
+					  <td><%= pro.name %></td>
+					<% end %>
+				<% end %>	
+			<% end %>
 		<% end %>
-	</tr>
+		
 <%end%>
-
+</tr>
+<br/><br/>
+<%end%>
 </table>
+
+
