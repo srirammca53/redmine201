@@ -59,8 +59,20 @@ var id =0
 			</tr>
 		<% end %>
 </table>
-<% if User.current.admin? %>
-	<%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
-<% end %>
+
 </body>
 </html>
+<%@uid=  User.current.id %>
+<%@member =  @project.members.find(:all, :conditions => {:user_id => @uid,:project_id => @project.id }) %>
+
+<% @member.each do |m| %>
+<%@mem_role = m.member_roles.find(:all) %>
+<% @mem_role.each do |role| %>
+
+<%if User.current.admin? || role.role_id == 6  %>
+<%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
+<%end %>
+<% end %>
+<% end %>
+
+
