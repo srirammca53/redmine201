@@ -1,3 +1,4 @@
+<%= javascript_include_tag('RGraph.bar', 'RGraph.common.core')%>
 <div class="contextual">
   <% if User.current.allowed_to?(:add_subprojects, @project) %>
     <%#= link_to l(:label_subproject_new), {:controller => 'projects', :action => 'new', :parent_id => @project}, :class => 'icon icon-add' %>
@@ -16,7 +17,20 @@
 	<b>Description : <u><%= @project.description %></u></b><br/>
 </td>
 <td>
-	
+
+	<canvas id="venkat" width="250" height="150"></canvas>
+	<% @a =100%><% @b =80%>
+    <script>
+        window.onload = function ()
+        {
+            var bar5 = new RGraph.Bar('venkat', [[<%=@project.estimation_time%>,<%=@b%>,90]]);
+            bar5.Set('chart.colors', ['#CC1111', '#11CCCC', '#1111CC']); 
+            bar5.Set('chart.labels', ['Project', 'UserStory', 'Task']);
+            bar5.Set('chart.strokestyle', 'transparent');
+            bar5.Set('chart.ymax', <%=@project.estimation_time%>);
+            bar5.Draw();
+        }
+    </script>
 </td>
 </tr>
 </table>
