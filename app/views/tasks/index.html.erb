@@ -59,7 +59,9 @@
 <% end %>
 <%#= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 <script>
-$.noConflict();
+<script type="text/javascript"> 
+$.noConflict(); 
+</script> 
 jQuery(document).ready(function($) {
 	$('.updatetime').colorbox();
   });

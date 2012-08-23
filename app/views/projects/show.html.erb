@@ -8,8 +8,9 @@
 <% user = User.current.lastname %>
 <div class="splitcontentleft">
   <div class="wiki">
-<b>Project Name :<%= @project.name %></b><br/>
-<b>Description :<%= textilizable @project.description %></b><br/>
+<b>Project Name :<u><%= @project.name %></u></b><br/>
+<b>Total Project Estimated Hours: <u><%= @project.estimation_time %> </u></b><br/>
+<b>Description : <u><%= @project.description %></u></b><br/>
 
   <% unless @project.homepage.blank? %>
    <%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %><br/>
@@ -21,8 +22,7 @@
   <% @project.visible_custom_field_values.each do |custom_value| %>
   <% if !custom_value.value.blank? %>
     <b><%=h custom_value.custom_field.name %>: <% @estimation_time =h show_value(custom_value) %>
-<% @project.update_attributes(:estimation_time => @estimation_time) %>
-<%= @project.estimation_time %> </b>
+	<% @project.update_attributes(:estimation_time => @estimation_time) %>
   <% end %>
   <% end %>
 
