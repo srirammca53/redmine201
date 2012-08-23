@@ -172,7 +172,9 @@ class UsersController < ApplicationController
   end
 
   def destroy
+  
     @user.destroy
+  
     respond_to do |format|
       format.html { redirect_to_referer_or(users_url) }
       format.api  { head :ok }

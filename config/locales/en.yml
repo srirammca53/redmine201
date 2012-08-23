@@ -215,6 +215,7 @@ en:
   gui_validation_error_plural: "%{count} errors"
 
   field_name: Name
+  field_estimation_time : Estimation Time
   field_description: Description
   field_summary: Summary
   field_is_required: Required

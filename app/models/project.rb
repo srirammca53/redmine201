@@ -61,7 +61,7 @@ class Project < ActiveRecord::Base
   acts_as_nested_set :order => 'name', :dependent => :destroy
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
-
+  attr_accessible :estimation_time
   acts_as_customizable
   acts_as_searchable :columns => ['name', 'identifier', 'description'], :project_key => 'id', :permission => nil
   acts_as_event :title => Proc.new {|o| "#{l(:label_project)}: #{o.name}"},

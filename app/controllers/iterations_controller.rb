@@ -18,7 +18,7 @@ end
 
 def create
     @project = Project.find(params[:project_id])
-	raise params[:iteration].inspect
+	
     @iteration = @project.iteration.new(params[:iteration])
 	@flag = 0
    @project.iteration.each do |it|
