@@ -10,14 +10,13 @@ end
 def new
 
     @task = Task.find(params[:task_id])
-    @log = @task.logs.new
- 
+    @log = Log.new
 
  render :layout => false
 end
 
 def create
-    
+
     @task = Task.find(params[:task_id]) # task id
     @st = Story.find(:all, :conditions => {:id => @task.story_id})
     @st.each do |st|
@@ -30,20 +29,20 @@ def create
  @it = Iteration.find(:all, :conditions => {:id => @stit_id})
 
   @it.each do |it|
-	@itid =it.id # iteration id
-	@proid = it.project_id
-  end
-  @proid = Project.find(:all, :conditions => {:id => @proid})
-  
+   @itid =it.id # iteration id
+    @itpro_id = it.id 
+	
+	end
+   
+  @proid = Project.find(:all, :conditions => {:id =>  @itpro_id})
 
    @proid.each do |pro|
-		@pro_id = pro.id   # project id 
+    @pro_id = pro.id   # project id 
 	end
-	 
-    @log = @task.logs.build(params[:log])
-    
-    if @log.save 
-        #raise "hi"
+	         #raise params[:log].inspect
+
+    @logs = @task.logs.create(params[:log])
+    if @logs.save
 		redirect_to project_iteration_story_tasks_path( @pro_id, @itid, @stid )
 		else
 		raise "bad"
