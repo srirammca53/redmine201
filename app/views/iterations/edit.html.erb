@@ -1,19 +1,21 @@
 <%= javascript_include_tag('jquery.min', 'jquery.datepick')%>
 <%= stylesheet_link_tag('jquery.datepick')%>
 <h1>Editing Iteration</h1>
-
+<% @flag = 0 %>
 <html>
 <p> New Iteration for <b><%= @project.name %></b> </p>
 <table border="1" >
 <tr>
-<%= form_for @iteration , :url => {:action => :update, :id => @project.id } do |f| %>
+<%= form_for @iteration , :url => {:action => :update, :id => @iteration.id } do |f| %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
+
   <div class="field">
+
     <%= f.label :Start_date %><br />
-    <%#= f.date_select :start_date %>
+     <%#= f.date_select :start_date %>
     <%= f.text_field :start_date, :value => @iteration.start_date.strftime("%Y-%d-%m"),:id => :popupDatepicker %>
   </div>
   <div class="field">
@@ -23,21 +25,11 @@
   </div>
    <div class="field">
     <%= f.label :Status %><br />
-   <%= f.label :Status %><br />
 
-  <% @project.iteration.each do |it| %>
-	  <%if it.status == "Open" %>
-	   <% @flag = @flag.to_i + 1 %> 
-	  <% end %>
-  <% end %>
-
-  <% if @flag == 0 %>
  <%= f.select(:status, options_for_select(["Planned","Open", "Closed", "Locked"])) %>
-    <% else %>
-<% flash[:error] = "One Iteration in this project is already opened " %>
- <%= f.select(:status, options_for_select(["Planned", "Closed", "Locked"])) %>
- <% end %>
+
   </div>
+
   <div class="field">
     <%= f.label :Description %><br />
     <%= f.text_area :description %>
