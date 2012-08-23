@@ -53,7 +53,16 @@
 			</tr>
 	     <% end %>
 </table>
-<% if User.current.admin? %>
-<%= link_to "create story" , new_project_iteration_story_path(@project.id, @iteration.id) %>
-<% end %>
 
+<%@uid=  User.current.id %>
+<%@member =  @project.members.find(:all, :conditions => {:user_id => @uid,:project_id => @project.id }) %>
+
+<% @member.each do |m| %>
+<%@mem_role = m.member_roles.find(:all) %>
+<% @mem_role.each do |role| %>
+
+<%if User.current.admin? || role.role_id == 6  %>
+<%= link_to "create story" , new_project_iteration_story_path(@project.id, @iteration.id) %>
+<%end %>
+<% end %>
+<% end %>
