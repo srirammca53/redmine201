@@ -26,7 +26,7 @@
 				</td><td width ="100px">
 					<%=  ts.acceptor %>
 				</td><td width ="100px">
-					<%=  ts.estimated_hours %>
+					<%=  ts.estimated_hours.round(2) %>
 				</td><td width ="200px">
 					<%=  ts.description %>
 				</td>
@@ -36,7 +36,7 @@
 					<% @logs.each do |lg|  %>   <% if ts.id.to_i == lg.task_id.to_i %>    <%@spendhours= lg.spent_hours %> <% end %> <% end %><%= @spendhours%>
 				</td>	
 				<td width ="100px">
-					<% @logs.each do |lg|  %>   <% if ts.id.to_i == lg.task_id.to_i %>    <%@remaininghours= lg.remaining_time %> <% end %> <% end %><%= @remaininghours%>
+					<% @logs.each do |lg|  %>   <% if ts.id.to_i == lg.task_id.to_i %>    <%@remaininghours= lg.remaining_time %> <% end %> <% end %><%= @remaininghours.round(2)%>
 				</td>
 				<td width ="50px">
 					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
