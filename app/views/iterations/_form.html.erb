@@ -8,8 +8,11 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
+    
+    <%= f.select(:iterationtype, options_for_select(["Weekly", "Monthly", "Duo-Monthly"])) %>
+  </div>
+  <div class="field">
     <%= f.label :Start_date %><br />
-    <%#= f.date_select :start_date %>
     <%= f.text_field :start_date, :id => :popupDatepicker %>
   </div>
   <div class="field">

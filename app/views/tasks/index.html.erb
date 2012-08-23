@@ -1,6 +1,6 @@
 <%= stylesheet_link_tag('colorbox')%>
 <%= javascript_include_tag('jquery.min', 'jquery.colorbox')%>
-<table >
+<table border =1 >
 		<p><b>List of Tasks</b></p>
 		<tr >
 			<th width ="200px">Name</th>
@@ -32,14 +32,21 @@
 				</td>
 				
 				<td width ="100px">
-					<%#@log = Log.find(:all, :conditions=>{ts.id => @log.id}) %>
-					<% @logs.each do |lg|  %>   <% if ts.id.to_i == lg.task_id.to_i %>    <%= lg.spent_hours %> <% end %> <% end %>
+					<% @logs = Log.find(:all, :conditions => {:task_id => ts.id }) %>
+					<% @logs.each do |time|%>
+						<% @spenthr =time.spent_hours%>
+					<%end%>
+					<%= @spenthr%>
 				</td>	
 				<td width ="100px">
-					<%=  ts.description %>
+					<% @logs = Log.find(:all, :conditions => {:task_id => ts.id }) %>
+					<% @logs.each do |time|%>
+						<% @remaining =time.remaining_time%>
+					<%end%>
+					<%= @remaining%>
 				</td>
 				<td width ="50px">
-					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
+					<%= link_to "update task", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
 				</td>
 				<td width ="50px">
 					<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),   new_task_log_path(ts.id), :class=> "updatetime" %>
@@ -50,7 +57,10 @@
 <% if User.current.admin? %>
 <%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 <% end %>
-<%= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
+<%#= link_to "create Task" , new_project_iteration_story_task_path(@project.id, @iteration.id,@story.id) %>
 <script>
+$.noConflict();
+jQuery(document).ready(function($) {
 	$('.updatetime').colorbox();
+  });
 </script>

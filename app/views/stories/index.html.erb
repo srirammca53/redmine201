@@ -10,7 +10,7 @@
 			<th width ="100px">Status</th>
 			<th width ="100px">Priority</th>
 			<th width ="100px">Order</th>
-			<th width ="100px">Estimated hours</th>
+	
 			
 		</tr>
 		<%@iteration.story.each do |st| %>
@@ -21,32 +21,30 @@
 				</td>
 				<td width ="200px">
 
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
+					<%= st.description %>
 				</td>
 				<td width ="200px">
 
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
+					<%=   st.customer %>
 				</td>
 				<td width ="200px">
 
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
+					<%=   st.tracker %>
 				</td>
 				<td width ="200px">
 
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
+					<%=   st.status %>
 				</td>
 				<td width ="200px">
 
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
+					<%=   st.priority %>
 				</td>
 				<td width ="200px">
 
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
+					<%=  st.order %>
 				</td>
-				<td width ="200px">
-
-					<%#=  link_to "Edit", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>
-				</td>
+	
+				
 				<td width ="200px">
 
 					<%=  link_to "Update", edit_project_iteration_story_path(@project.id, @iteration.id, st.id) %>

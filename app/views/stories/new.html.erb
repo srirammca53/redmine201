@@ -9,19 +9,20 @@
   </div>
   <div class="field">
     <%= f.label :Description %><br />
-    <%= f.text_field :description %>
+    <%= f.select(:description, options_for_select(["Planned", "Carried Over", "Added"])) %>
   </div>
   <div class="field">
     <%= f.label :Customer %><br />
-    <%= f.text_field :customer %>
+    <%= f.select :customer, User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]},  {:include_blank => 'select'} %>
   </div>
   <div class="field">
     <%= f.label :Tracker %><br />
-    <%= f.text_field :tracker %>
+     <%= f.select :tracker, User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]},  {:include_blank => 'select'} %>
   </div>
  <div class="field">
     <%= f.label :Status %><br />
-    <%= f.text_field :status %>
+    <%= f.select(:status, options_for_select(["Draft", "Defined", "Estimated", "Planned", "Implemented", "Verified", "Accepted"])) %>
+
   </div>
  <div class="field">
     <%= f.label :Priority %><br />

@@ -4,15 +4,20 @@
 	
 		<tr width="900px">
 			<th width ="200px">Name</th>
+			<th width ="500px">IterationType</th>
 			<th width ="100px">Start_date</th>
 			<th width ="100px">End_date</th>
-			<th width ="500px">Description</th>
+			<th width ="500px">Description</th>	
+		
 			<th width ="500px">Edit</th>
 		</tr>
 		<%@project.iteration.each do |it| %>
 			<tr width="900px" align="center">
 				<td width ="200px">
 					<%= link_to it.name, project_iteration_path(@project.id, it.id) %>
+				</td>
+				<td width ="100px">
+					<%= it.iterationtype %>
 				</td>
 				<td width ="100px">
 					<%= it.start_date %>
