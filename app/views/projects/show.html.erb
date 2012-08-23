@@ -8,9 +8,19 @@
 <% user = User.current.lastname %>
 <div class="splitcontentleft">
   <div class="wiki">
-<b>Project Name :<u><%= @project.name %></u></b><br/>
-<b>Total Project Estimated Hours: <u><%= @project.estimation_time %> </u></b><br/>
-<b>Description : <u><%= @project.description %></u></b><br/>
+<table>
+<tr>
+<td>
+	<b>Project Name :<u><%= @project.name %></u></b><br/>
+	<b>Total Project Estimated Hours: <u><%= @project.estimation_time %> </u></b><br/>
+	<b>Description : <u><%= @project.description %></u></b><br/>
+</td>
+<td>
+	
+</td>
+</tr>
+</table>
+
 
   <% unless @project.homepage.blank? %>
    <%=l(:field_homepage)%>: <%= link_to h(@project.homepage), @project.homepage %><br/>
