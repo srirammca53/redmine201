@@ -3,7 +3,7 @@
 	Reported Date: <%= f.text_field :report_date, :id => :popupDatepicker%><br>
 	Spent Hours: <%= f.text_field :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%><br>
 	Remaining Time: <%= f.text_field :remaining_time, :id => "remaining_time"%><br>
-	<span id ="est" >Estimated Time: <%= f.text_field :estimated_time, :value => "#{@task.estimated_hours}", :id => "actual_value"%></span><br>
+	<span id ="est" >Estimated Time: <%= f.text_field :estimated_time, :value => "#{@task.estimated_hours.round(2)}", :id => "actual_value"%></span><br>
 	User One: <%= f.text_field :user1%><br>
 	User Two: <%= f.text_field :user2%><br>
 	<%= f.submit %>
