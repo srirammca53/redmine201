@@ -59,7 +59,7 @@ var id =0
 			</tr>
 		<% end %>
 </table>
-<%if User.current.admin? || role.role_id == 6  %>
+<%if User.current.admin?  %>
 	<%= link_to "New Iteration",  new_project_iteration_path(@project.id) %>
 <%end %>
 

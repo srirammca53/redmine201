@@ -56,7 +56,7 @@
 
 
 
-<%if User.current.admin? || role.role_id == 6  %>
+<%if User.current.admin? %>
 <%= link_to "create story" , new_project_iteration_story_path(@project.id, @iteration.id) %>
 <%end %>
 
