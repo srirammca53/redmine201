@@ -39,7 +39,6 @@ def create
    @proid.each do |pro|
     @pro_id = pro.id   # project id 
 	end
-	         #raise params[:log].inspect
 
     @logs = @task.logs.create(params[:log])
     if @logs.save
