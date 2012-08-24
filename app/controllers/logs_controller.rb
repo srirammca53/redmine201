@@ -30,18 +30,19 @@ def create
 
   @it.each do |it|
    @itid =it.id # iteration id
-    @itpro_id = it.id 
+    @itpro_id = it.project_id 
 	
 	end
-   
+  
   @proid = Project.find(:all, :conditions => {:id =>  @itpro_id})
-
+  
    @proid.each do |pro|
     @pro_id = pro.id   # project id 
 	end
-
+     
     @logs = @task.logs.create(params[:log])
     if @logs.save
+                  
 		redirect_to project_iteration_story_tasks_path( @pro_id, @itid, @stid )
 		else
 		raise "bad"

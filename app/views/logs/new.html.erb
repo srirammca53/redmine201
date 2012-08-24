@@ -1,4 +1,4 @@
-
+<html>
 <%= form_for @log, :url => {:action => :create, :id => @task.id } do |f| %>
 	Reported Date: <%= f.text_field :report_date, :id => :popupDatepicker%><br>
 	Spent Hours: <%= f.text_field :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%><br>
@@ -27,3 +27,4 @@
 
 	}
 </script> 
+</html>

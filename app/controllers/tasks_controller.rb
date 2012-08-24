@@ -17,16 +17,20 @@ end
 def create
     @user = User.find(:all)
     @story = Story.find(params[:story_id])
-    @task = @story.tasks.create(params[:task])
-
+    @task = @story.tasks.create(params[:task]) 
+    @stid = @story.name
+    @it = Iteration.find(:all , :conditions => {:id => @story.iteration_id }) 
+     @it.each do |iname|  @iname = iname.name end 
 	@user.each do |usr|
 		if @task.acceptor == usr.lastname
 		@usermail = usr
 		
 		end
         end 
-	if @task.save 
-	   TaskMailer.task_creation(@usermail).deliver
+	if @task.save
+		@tid = @task.id
+          
+	   TaskMailer.task_creation(@usermail,@iname,@tid).deliver
 	end
     render :action => "show"
 end
@@ -51,7 +55,12 @@ def update
 		end
         end 
     if @task.update_attributes(params[:task])
-	TaskMailer.task_update(@usermail).deliver
+	 @week = Date.today - @task.last_mail.to_date
+	 @last_mail = @task.last_mail
+	 @taskid = @task.id
+	if @week == 7/1
+		TaskMailer.task_update(@usermail,@taskid,@last_mail).deliver
+	end 
         render :action => "show"
     else
 		 render :action => "edit"
