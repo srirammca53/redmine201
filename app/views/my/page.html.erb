@@ -1,8 +1,6 @@
-
 <% @flag = 0 %>
 <% @tid = Task.find(:all)%>
 <%#= @tid.count %>
-
 <table>
 <tr>
 <th>Task name</th>
@@ -14,7 +12,7 @@
 <tr>
 	<% if taskmain.acceptor == User.current.lastname%>
         
-	<td> <%=taskmain.name%><br></td>
+	<td> <%=taskmain.name%></td>
         <% @user_story = Story.find(:all, :conditions => {:id => taskmain.story_id }) %>
 		<% @user_story.each do |st| %>
 	    	<td>  <%= st.name %></td>
@@ -31,7 +29,7 @@
 		
 <%end%>
 </tr>
-<br/><br/>
+
 <%end%>
 </table>
 
