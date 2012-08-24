@@ -1,4 +1,5 @@
-<html>
+<% @logreport = Log.find(:all)%>
+
 <%= form_for @log, :url => {:action => :create, :id => @task.id } do |f| %>
 	Reported Date: <%= f.text_field :report_date, :id => :popupDatepicker%><br>
 	Spent Hours: <%= f.text_field :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%><br>
@@ -8,13 +9,11 @@
 	User Two: <%= f.text_field :user2%><br>
 	<%= f.submit %>
 <%end%>
-
 <script>
 	function myFunction()
 	{
 		var current_ele = $("#log_spent_hours").val();
-		var actua_value = $("#actual_value").val();
-         
+		var actua_value = $("#actual_value").val();       
 		if(current_ele < parseInt(actua_value))
 		{
 			var remaining_value = actua_value-current_ele
@@ -24,7 +23,5 @@
 		{
 			alert("hey you exceeded actuall value");
 		}
-
 	}
 </script> 
-</html>
