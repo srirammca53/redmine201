@@ -50,6 +50,8 @@ class MyController < ApplicationController
  @user = User.current
 @pro_arrays = Array.new
 @member = Member.find(:all, :conditions => {:user_id => @user })
+@logs = Log.find(:all)
+
   end
 
   # Edit user's account
@@ -195,4 +197,24 @@ class MyController < ApplicationController
     end
     render :nothing => true
   end
+
+def reports
+
+end
+
+def generate_reports
+	@option = params[:select]
+	
+end
+def project_reports
+@project = params[:project_id]
+
+end
+def user_reports
+@user = params[:user_id]
+@projects = Project.find(:all)
+@pro_arrays = Array.new
+@member = Member.find(:all, :conditions => {:user_id => @user })
+
+end
 end

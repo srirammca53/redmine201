@@ -71,7 +71,7 @@
 			<tr width="600px">	
 			<td width="100px"><%=link_to task.name, project_iteration_story_task_path(@pro_id, it.id, st.id, task.id)%></td>
 			<td width="100px"><%= task.task_type %></td>
-			<td width="100px"><%= task.estimated_hours.round(2) %></td>
+			<td width="100px"><%= task.estimated_hours %></td>
 			<td width="100px"><%= task.acceptor %></td>
 			<td width="200px"><%= task.description %></td>
 

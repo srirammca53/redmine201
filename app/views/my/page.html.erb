@@ -1,36 +1,93 @@
+<html>
+<head>
+<script>
+function date()
+{
+var date = document.getElementById("date").value
+document.getElementById("date1").value = date
+var date1 = document.getElementById("date1").value
+alert(date1);
+}
+</script>
+<style>
+#spent_hours
+{
+width:20px;
+}
+td
+{
+text-align :center;
+}
+</style>
+</head>
+<body onload="do_stuff()">
 <% @flag = 0 %>
 <% @tid = Task.find(:all)%>
 <%#= @tid.count %>
-<table>
-<tr>
-<th>Task name</th>
-<th>Story name</th>
-<th>Iteration name</th>
-<th>Project name </th>
+<%if User.current.admin?  %>
+<%= link_to "Reports",my_reports_path %>
+<% end %>
+<table width=100%>
+<tr width=100%>
+<th  width=10%>Task name</th>
+<th width=10%>Story name</th>
+<th width=10%>Iteration name</th>
+<th width=10%>Project name </th>
+<th width=10%>Estimated time</th>
+<th width=10%>Actual time</th>
+<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date %></th>
+<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date - 1.day %></th>
+<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date - 2.days %></th>
+<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date - 3.days %></th>
 </tr>
 <%@tid.each do |taskmain|%>
-<tr>
+  <tr>
 	<% if taskmain.acceptor == User.current.lastname%>
         
-	<td> <%=taskmain.name%></td>
-        <% @user_story = Story.find(:all, :conditions => {:id => taskmain.story_id }) %>
+	  <td width=10%> <%=taskmain.name%></td>
+          <% @user_story = Story.find(:all, :conditions => {:id => taskmain.story_id }) %>
 		<% @user_story.each do |st| %>
-	    	<td>  <%= st.name %></td>
-		 <% @iteration = Iteration.find(:all, :conditions => {:id => st.iteration_id }) %>
+	    	  <td width=10%>  <%= st.name %></td>
+		   <% @iteration = Iteration.find(:all, :conditions => {:id => st.iteration_id }) %>
 			<% @iteration.each do |it| %>
-			<td> <%= it.name %></td>
+			        <td width=10%> <%= it.name %></td>
 			 	<% @projects.each do |pro| %>
 					<% if pro.id == it.project_id %>
-					  <td><%= pro.name %></td>
+					  <td width=10%><%= pro.name %></td>
+						<td width=10%><%= taskmain.estimated_hours.round(2) rescue 0 %></td>
+						<td width=10%><% @actual_hours = 0 %>
+							     
+							      	
+									<% @log = Log.find(:all, :conditions => {:task_id => taskmain.id}) %>
+										<% @log.each do |tlog|%>
+										<% @actual_hours = @actual_hours.to_i + tlog.spent_hours.to_i %>
+										<% end %>
+							      
+					        <%= @actual_hours %>
+						</td>
+ 						<% @logs = Log.new %>
+						<%= form_tag(update_tasks_task_log_path(taskmain.id,1), :method => :post) do %>
+							<td width=10%>
+								<%= text_field_tag 'spent_hours'%>
+								<% reported_date = @date %>
+								<%= hidden_field_tag 'reported_date' , :value=> reported_date %>
+								<% current_task = taskmain.id %>
+								<%= hidden_field_tag 'task_id' , :value=> current_task %>&nbsp;
+								<%= submit_tag('log')%> 
+							</td>
+		                                        <td width=10%></td>
+							<td width=10%></td>
+						<% end %> 
 					<% end %>
 				<% end %>	
-			<% end %>
-		<% end %>
-		
-<%end%>
-</tr>
+		     <% end %>
+	       <% end %>	
+         <%end%>
+ </tr>
 
 <%end%>
+
 </table>
-
+</body>
+</html>
 

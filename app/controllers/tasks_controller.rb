@@ -1,5 +1,8 @@
 class TasksController < ApplicationController
+
+
 def index
+  
   @project = Project.find(params[:project_id])
   @iteration = Iteration.find(params[:iteration_id])
   @story = Story.find(params[:story_id])
@@ -85,8 +88,13 @@ def log
  redirect_to :controller=> :logs, :action => :new
  render :layout => false
 end
-def create_logs
+
+def total_tasks
 	
-	raise "hi"
+	
+end
+def update_tasks
+	
+	raise "yes".inspect
 end
 end

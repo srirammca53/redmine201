@@ -1,5 +1,9 @@
 <%= stylesheet_link_tag('colorbox')%>
 <%= javascript_include_tag('jquery.min', 'jquery.colorbox')%>
+<% @pro = Project.find(params[:project_id]) %>
+<% @iteration = Iteration.find(params[:iteration_id]) %> 
+<% @story = Story.find(params[:story_id]) %> 
+<%#= link_to "total_tasks", total_tasks_project_iteration_story_tasks_path(@pro.id,@iteration.id,@story.id) %>
 <table >
 		<p><b>List of Tasks</b></p>
 		<tr >
@@ -15,9 +19,12 @@
 			<th width ="50px"></th>
 		</tr>
 		<%@story.tasks.each do |ts| %>
+
+			<% pro = Project.find(params[:project_id]) %>
 			<tr  align="center">
-				<td width ="200px"><% pro = Project.find(params[:project_id]) %><%#= pro.inspect %>
+				<td width ="200px"><%#= pro.inspect %>
 					<%= link_to ts.name,project_iteration_story_task_path(pro.id,@iteration.id,@story.id,ts.id) %>
+					
 				</td>
 				<td width ="200px">
 					<%=  ts.task_type %>
@@ -45,6 +52,7 @@
 					<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),   new_task_log_path(ts.id), :class=> "updatetime" %>
 				</td>
 			</tr>
+
 	     <% end %>
 </table>
 <% if User.current.admin? %>
@@ -54,3 +62,7 @@
 <script>
 	$('.updatetime').colorbox();
 </script>
+
+
+
+

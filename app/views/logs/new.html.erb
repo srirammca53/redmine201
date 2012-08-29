@@ -7,6 +7,7 @@
 	<span id ="est" >Estimated Time: <%= f.text_field :estimated_time, :value => "#{@task.estimated_hours.round(2)}", :id => "actual_value"%></span><br>
 	User One: <%= f.text_field :user1%><br>
 	User Two: <%= f.text_field :user2%><br>
+
 	<%= f.submit %>
 <%end%>
 <script>
