@@ -21,9 +21,10 @@
 	   <% @iterations.each do |it| %>
 		<% @stories = Story.find(:all, :conditions => {:iteration_id => it.id } ) %>
 			<% @stories.each do |st| %>
+					<% st.id %>
 			   <% @tasks = Task.find(:all,:conditions => {:story_id => st.id}) %>
 				<% @tasks.each do |task| %>
-				 <% if @current_date.to_date == task.created_on %>
+				 <% if @current_date.to_date == task.created_at.to_date %>
 				   <%= task.name %>
 				 <% else %>
 					no
