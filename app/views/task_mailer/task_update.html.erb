@@ -1,5 +1,7 @@
-Task updated which is  assigned to you!
-<%#= @task_acceptor%>
+Task updated which is  assigned to you!<br/><br/>
+Last mail sent on  <b><%= @week %></b><br/><br/>
+Today date : <b><%= Date.today %></b><br/>
+Task name :<% @tasks.each do |t|%>  <% if t.created_at.to_date > @week.to_date %>Task <b><%= t.name %></b> created on <%= t.created_at %><br/> <% end %><% end %> <br/>
 
 http://localhost:3000
 

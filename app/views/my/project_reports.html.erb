@@ -1,0 +1,54 @@
+<html>
+<b>Project Name:  <%@project %></b>
+<% @project = Project.find(@project) %>
+<%= @project.name %></br>
+<b> created on </b> <%= @project.created_on.to_date %><br/>
+<b> Project total Estimation time : </b> <%= @project.estimation_time %> hrs<hr/>
+ <% @actual_hours = 0 %>
+<%  @members =  @project.member_principals.all %>
+
+<table border ="1px">
+			<tr>
+			<th> Date </th>
+			<th> Employee Name </th>
+			<th>  Estimated Hours </th>
+			<th>  Actual hours </th>
+			</tr>
+<% @iterations = Iteration.find(:all, :conditions =>{:project_id => @project.id}) %>
+	<% @iterations.each do |it| %>
+	<% @stories = Story.find(:all, :conditions => {:iteration_id => it.id }) %>
+		<% @stories.each do |st| %>
+		<% @tasks = Task.find(:all ,:conditions=> {:story_id => st.id}) %>
+			
+			<% @tasks.each do |task| %>
+				<% @logs = Log.find(:all, :conditions => {:task_id => task.id }) %>
+				<% @logs.each do |lg| %>
+				<tr>
+				<td><%= lg.report_date %></td>
+				<td><%= task.acceptor %></td>
+				<td><%= task.estimated_hours  %></td>
+				<td><%= lg.spent_hours %></td>
+				<% @actual_hours = @actual_hours.to_i + lg.spent_hours.to_i %>
+				</tr>
+				 
+				<% end%>
+			
+			<% end %>
+		<% end %>
+	<% end %>
+</table>
+<tfoot>
+<hr/>
+<center>
+<b> Actual Hours :</b><%= @actual_hours.to_f %>   hrs<br/>
+
+</center>
+</tfoot>
+<style>
+tfoot
+{
+padding:20px;
+}
+</style>
+
+</html>

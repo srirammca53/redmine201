@@ -1,5 +1,6 @@
-Task assigned to you!
-<%#= @task_acceptor%>
+Task assigned to you!<br/>
+Task name :<% @task.each do |t|%><%= t.name %> <% end %> <br/>
+Project name : <%= @pro_name %></br>
 
 http://localhost:3000
 

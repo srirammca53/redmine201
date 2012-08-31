@@ -1,0 +1,50 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<% @flag = 0 %>
+<% @tid = Task.find(:all)%>
+<table>
+<tr>
+<th width=20%>Task name</th>
+<th width=20%>Story name</th>
+<th width=20%>Iteration name</th>
+<th width=20%>Project name </th>
+<th width=20%><%=Time.now.to_date %> </th>
+</tr>
+<% @current_user = User.current.lastname %> 
+<% @tid.each do |task| %>
+ <tr>
+  <% if @current_user == task.acceptor %>
+       <td width=20%><%= task.name %></td>
+	<% @story = Story.find(:all,:conditions => {:id => task.story_id}) %>
+	<% @story.each do | story | %>
+	<td width=20%><%= story.name %></td>
+	
+	<% @iteration = Iteration.find(:all, :conditions => {:id => story.iteration_id}) %>
+	<% @iteration.each do |iteration| %>
+	<td width=20%><%= iteration.name %></td>
+        <% @projects = Project.all %>
+	<% @projects.each do |pro| %>
+	   <% if pro.id == iteration.project_id %>
+	   <td width=20%> <%= pro.name %></td>
+	   <td width=20%>
+ 	        <%= form_tag(@tasks, :url => {:action=>"update_tasks", :controller=>"tasks"}, :method => :post) do %>
+ 		<%= text_field_tag :name => "spent_hours", :value => "" %>
+		<%= submit_tag %>
+                <% end %>			
+						
+           </td>
+	   <% end %>	
+        <% end %>	
+	<% end %>
+	<% end %>
+ <% end %>
+</tr>
+
+<% end %>
+</table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<html>
+<head>
+<script>
+
+</script>
+</head>
+<body>
+<% @option_value = @option %>
+<%if @option_value == "User" %>
+	<p> You selected User reports </p>
+	<% @users = User.find(:all) %>
+	<table id="users" border="1px">
+	   <% @users.each do |user| %>
+	   	<tr id=<%= user.id %>><td><b><%= link_to user.name ,my_user_reports_path(:user_id => user.id) %></b></td></tr>
+	   <% end %>
+	</table>
+<% end %>
+<%if @option_value == "Project" %>
+<p> You selected Project reports </p>
+<% @projects = Project.find(:all) %>
+	<table id="projects" border="1px">
+	   <% @projects.each do |project| %>
+	   	<tr ><td id="<%=project.id%>"><b><%= link_to project.name ,my_project_reports_path(:project_id => project.id) %></b></td></tr>
+	   <% end %>
+	</table>
+<% end %>
+</body>
+</html>

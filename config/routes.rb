@@ -17,7 +17,12 @@
 
 RedmineApp::Application.routes.draw do
 	  resources :tasks do
-			resources :logs 	
+			resources :logs do
+			   
+				get 'send_mails'
+				post 'update_tasks', :on => :member
+			    
+			end
 		  end 
 
   resources :timereports
@@ -77,7 +82,10 @@ RedmineApp::Application.routes.draw do
   match 'my/add_block', :controller => 'my', :action => 'add_block', :via => :post
   match 'my/remove_block', :controller => 'my', :action => 'remove_block', :via => :post
   match 'my/order_blocks', :controller => 'my', :action => 'order_blocks', :via => :post
-
+  match 'my/reports', :controller => 'my', :action => 'reports', :via => [:get, :post]
+  match 'my/generate_reports', :controller => 'my', :action => 'generate_reports', :via => [:get, :post]
+  match 'my/project_reports', :controller => 'my', :action => 'project_reports', :via => [:get, :post]
+  match 'my/user_reports', :controller => 'my', :action => 'user_reports', :via => [:get, :post]
   resources :users
   match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'
   match 'users/:id/memberships/:membership_id', :to => 'users#destroy_membership', :via => :delete
@@ -108,7 +116,10 @@ RedmineApp::Application.routes.draw do
 	 resources :iterations do 
 		resources :stories do
 		  resources :tasks do
-	 	
+	 	    collection do 
+			get 'total_tasks'
+			
+			end
 		  end 
 		end
   end
