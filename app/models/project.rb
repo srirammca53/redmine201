@@ -61,7 +61,7 @@ class Project < ActiveRecord::Base
   acts_as_nested_set :order => 'name', :dependent => :destroy
   acts_as_attachable :view_permission => :view_files,
                      :delete_permission => :manage_files
-  attr_accessible :estimation_time
+  attr_accessible :estimation_time , :type
   acts_as_customizable
   acts_as_searchable :columns => ['name', 'identifier', 'description'], :project_key => 'id', :permission => nil
   acts_as_event :title => Proc.new {|o| "#{l(:label_project)}: #{o.name}"},
@@ -614,12 +614,14 @@ class Project < ActiveRecord::Base
     'description',
     'homepage',
     'is_public',
+    'type',
     'identifier',
     'custom_field_values',
     'custom_fields',
     'tracker_ids',
     'estimation_time',
     'issue_custom_field_ids'
+     
   
 
   safe_attributes 'enabled_module_names',

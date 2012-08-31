@@ -1,0 +1,43 @@
+<b>Project Name:  <%@project %></b>
+<% @project = Project.find(@project) %>
+<%= @project.name %></br><br/>
+<b> The employees working on this project </b><br/>
+<%  @members =  @project.member_principals.all %>
+<%  @members.each do |member| %>
+<b>Employee name :</b> <%= member.name %><br/>
+<% @user = User.find(member.project_id) %>
+<% @user.lastname %>
+
+<% end %>
+
+
+
+
+<% if @members == [] %>
+	<p> No members %>
+<% else %>
+	<%  @members.each do |member| %>
+		<% if member.project_id == @project.id %>
+			<b>Employee name :</b> <%= member.name %><br/>
+			<% @user = User.find(member.user_id) %>
+			<% @user.lastname %>
+			<% @tasks = Task.find(:all , :conditions => {:acceptor => @user.lastname }) %>
+			<% @tasks.each do |t| %>
+				<% if t.acceptor == @user.lastname %>
+				 <%@story = Story.find(:all, :conditions => {:id => t.story_id}) %>
+					<% @story.each do |st| %>
+					  <% @iteration = Iteration.find(:all, :conditions => {:id => st.iteration_id}) %>
+						<% @iteration.each do |it| %>
+							<%  @projects = Project.visible.find(:all, :conditions => {:id => it.project_id } ) %>
+							<% @projects.each do |p| %>
+							 <%= t.name %><br/>
+							<% end %>
+						<% end %>
+					<% end %>
+				 
+				<% end %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>
+
