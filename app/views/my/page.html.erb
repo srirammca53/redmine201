@@ -24,9 +24,9 @@ text-align :center;
 <% @flag = 0 %>
 <% @tid = Task.find(:all)%>
 <%#= @tid.count %>
-<%if User.current.admin?  %>
+
 <%= link_to "Reports",my_reports_path %>
-<% end %>
+
 
 <table width=100%>
 <tr width=100%>
