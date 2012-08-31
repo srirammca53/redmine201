@@ -1,0 +1,43 @@
+<html>
+<body>
+<i>From date :</i><%= @end %><br/>
+<i>to date :</i><%= @start %><br/>
+<b>Project name : </b> <%= @project.name %>
+<hr/>
+<table width=100%>
+	<tr>
+	  <th>Date</th>	
+	  <th>Task</th>
+	  <th>Spent hours</th>
+	  <th>Description </th>
+	</tr>
+<% @count = @end.to_date - @start.to_date %> 
+<% @i = 0 %>
+<% for @i in @i..@count.to_i %>
+	<tr>
+	 <td><%= @end.to_date %><% @current_date = @end.to_date %></td>	
+	  <td>
+           <% @iterations = Iteration.find(:all, :conditions => {:project_id => @project.id}) %>
+	   <% @iterations.each do |it| %>
+		<% @stories = Story.find(:all, :conditions => {:iteration_id => it.id } ) %>
+			<% @stories.each do |st| %>
+			   <% @tasks = Task.find(:all,:conditions => {:story_id => st.id}) %>
+				<% @tasks.each do |task| %>
+				 <% if @current_date.to_date == task.created_on %>
+				   <%= task.name %>
+				 <% else %>
+					no
+				 <% end %>
+				<% end %>
+			<% end %>
+  	   <% end %>
+          </td>
+	  <td> </td>
+	  <td> </td>
+	</tr>
+<% @end = @end.to_date - 1.day %>
+<% end %>
+</table>
+</body>
+</html>
+
