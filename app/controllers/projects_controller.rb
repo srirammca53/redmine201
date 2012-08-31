@@ -74,10 +74,11 @@ class ProjectsController < ApplicationController
     @issue_custom_fields = IssueCustomField.find(:all, :order => "#{CustomField.table_name}.position")
     @trackers = Tracker.all
     @project = Project.new
+	
     @project.safe_attributes = params[:project]
 
     if validate_parent_id && @project.save
-
+    
       @project.set_allowed_parent!(params[:project]['parent_id']) if params[:project].has_key?('parent_id')
       # Add current user as a project member if he is not admin
       unless User.current.admin?

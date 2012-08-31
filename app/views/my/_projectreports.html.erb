@@ -1,0 +1,30 @@
+<table border ="1px">
+			<tr>
+			<th> Date </th>
+			<th> Employee Name </th>
+			<th>  Estimated Hours </th>
+			<th>  Actual hours </th>
+			</tr>
+<% @iterations = Iteration.find(:all, :conditions =>{:project_id => @project.id}) %>
+	<% @iterations.each do |it| %>
+	<% @stories = Story.find(:all, :conditions => {:iteration_id => it.id }) %>
+		<% @stories.each do |st| %>
+		<% @tasks = Task.find(:all ,:conditions=> {:story_id => st.id}) %>
+			
+			<% @tasks.each do |task| %>
+				<% @logs = Log.find(:all, :conditions => {:task_id => task.id }) %>
+				<% @logs.each do |lg| %>
+				<tr>
+				<td><%= lg.report_date %></td>
+				<td><%= task.acceptor %></td>
+				<td><%= task.estimated_hours  %></td>
+				<td><%= lg.spent_hours %></td>
+				<% @actual_hours = @actual_hours.to_i + lg.spent_hours.to_i %>
+				</tr>
+				 
+				<% end%>
+			
+			<% end %>
+		<% end %>
+	<% end %>
+</table>

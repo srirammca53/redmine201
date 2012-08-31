@@ -27,6 +27,7 @@ text-align :center;
 <%if User.current.admin?  %>
 <%= link_to "Reports",my_reports_path %>
 <% end %>
+
 <table width=100%>
 <tr width=100%>
 <th  width=10%>Task name</th>
@@ -35,10 +36,10 @@ text-align :center;
 <th width=10%>Project name </th>
 <th width=10%>Estimated time</th>
 <th width=10%>Actual time</th>
-<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date %></th>
-<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date - 1.day %></th>
-<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date - 2.days %></th>
-<th id="date" width=10%><% @date =Time.now.to_date %> <%= @date - 3.days %></th>
+<th width=3%>Spent time</th>
+<th width=10%>Description</th>
+<th id="date" width=15%><% @date =Time.now.to_date %> <%= @date %></th>
+<th id="date" width=15%><% @date =Time.now.to_date %> <%= @date - 1.day %></th>
 </tr>
 <%@tid.each do |taskmain|%>
   <tr>
@@ -67,16 +68,16 @@ text-align :center;
 						</td>
  						<% @logs = Log.new %>
 						<%= form_tag(update_tasks_task_log_path(taskmain.id,1), :method => :post) do %>
-							<td width=10%>
+							<td width=30%>
 								<%= text_field_tag 'spent_hours'%>
 								<% reported_date = @date %>
 								<%= hidden_field_tag 'reported_date' , :value=> reported_date %>
 								<% current_task = taskmain.id %>
 								<%= hidden_field_tag 'task_id' , :value=> current_task %>&nbsp;
+								<%= text_field_tag 'description' %>
 								<%= submit_tag('log')%> 
 							</td>
-		                                        <td width=10%></td>
-							<td width=10%></td>
+		                                        
 						<% end %> 
 					<% end %>
 				<% end %>	

@@ -7,6 +7,7 @@ gem "coderay", "~> 1.0.6"
 gem "fastercsv", "~> 1.5.0", :platforms => [:mri_18, :mingw_18, :jruby]
 gem "builder"
 gem 'mysql'
+gem 'will_paginate', '~> 3.0'
 gem "delayed_job",  :git => 'git://github.com/collectiveidea/delayed_job.git'
 # Optional gem for LDAP authentication
 group :ldap do
