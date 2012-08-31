@@ -1,50 +1,19 @@
-<html>
-<head>
-<%= javascript_include_tag('jquery.min', 'jquery.datepick')%>
-<%= stylesheet_link_tag('jquery.datepick')%></head>
-<body>
-Generate reports:
-<table>
-	<tr >
-		<td>
-			Start Date:<%= text_field_tag 'start_date', value = ""%>
-		</td>
-		<td>
-			End Date:<%= text_field_tag 'end_date'%>
-		</td>
-		<td>
-			<%= hidden_field_tag 'start_date_hidden'%>
-		</td>
-		<td>
-			<%= hidden_field_tag 'end_date_hidden'%>
-		</td>
-		<td>
-			<%= submit_tag 'Generate', :id => "generateid"%>
-		</td>
-		<td>
-			<%= submit_tag 'reset', :id => "cleardates"%>
-		</td>
-	</tr>
-</table>
-</body>
-</html>
- <script>
-$(function() {
-	$('#start_date').datepick({dateFormat: 'yyyy-mm-dd'});
-	
-	$('#end_date').datepick({dateFormat: 'yyyy-mm-dd'});
-	
-	$("#cleardates").click(function(){
-			$("#start_date").val("");
-			$("#end_date").val("");
-	});
-	$("#generateid").click(function(){
-		var start = $("#start_date").val();
-		var end = $("#end_date").val();
-		$("#start_date_hidden").val(start);
-	});
-});
-
-
-
-</script>
+<% @option_value = @option %>
+<%if @option_value == "User" %>
+	<p> You selected User reports </p>
+	<% @users = User.find(:all) %>
+	<table id="users" border="1px">
+	   <% @users.each do |user| %>
+	   	<tr id=<%= user.id %>><td><b><%= link_to user.name , my_user_reports_path(:user_id => user.id) %></b></td></tr>
+	   <% end %>
+	</table>
+<% end %>
+<%if @option_value == "Project" %>
+<p> You selected Project reports </p>
+<% @projects = Project.find(:all) %>
+	<table id="projects" border="1px">
+	   <% @projects.each do |project| %>
+	   	<tr ><td id="<%=project.id%>"><b><%= link_to project.name ,my_project_reports_path(:project_id => project.id) %></b></td></tr>
+	   <% end %>
+	</table>
+<% end %>
