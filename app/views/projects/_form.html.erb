@@ -5,7 +5,7 @@
 <p><%= f.text_field :name, :required => true, :size => 60 %></p>
 <p><%= f.text_field :estimation_time, :required => true, :size => 60 %></p>
 
-<p><%= f.select(:typeofproject, options_for_select(["Client","Grouth", "Quality", "Vispertools"]), :required => true) %></p>
+<p><%= f.select(:typeofproject, options_for_select(["Client","Growth", "Quality", "Vispertools"]), :required => true) %></p>
 
 <% unless @project.allowed_parents.compact.empty? %>
     <p><%= label(:project, :parent_id, l(:field_parent)) %><%= parent_project_select_tag(@project) %></p>
