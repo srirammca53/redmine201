@@ -217,4 +217,15 @@ def user_reports
 @member = Member.find(:all, :conditions => {:user_id => @user })
 
 end
+
+def projectreport
+@end =  Time.now.to_date 
+@start = @end.to_date - 70.days
+@project = Project.find(1)
+#raise @project.inspect
+end
+
+def userreport
+
+end
 end

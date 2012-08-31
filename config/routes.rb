@@ -86,6 +86,8 @@ RedmineApp::Application.routes.draw do
   match 'my/generate_reports', :controller => 'my', :action => 'generate_reports', :via => [:get, :post]
   match 'my/project_reports', :controller => 'my', :action => 'project_reports', :via => [:get, :post]
   match 'my/user_reports', :controller => 'my', :action => 'user_reports', :via => [:get, :post]
+  match 'my/userreport', :controller => 'my', :action => 'userreport', :via => [:get, :post]
+  match 'my/projectreport', :controller => 'my', :action => 'projectreport', :via => [:get, :post]
   resources :users
   match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'
   match 'users/:id/memberships/:membership_id', :to => 'users#destroy_membership', :via => :delete
