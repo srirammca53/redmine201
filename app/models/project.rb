@@ -619,6 +619,7 @@ class Project < ActiveRecord::Base
     'custom_fields',
     'tracker_ids',
     'estimation_time',
+    'typeofproject',
     'issue_custom_field_ids'
   
 
