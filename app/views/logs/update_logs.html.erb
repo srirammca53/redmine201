@@ -13,10 +13,11 @@
 	function myFunction()
 	{
 		var current_ele = $("#log_spent_hours").val();
-		var actua_value = $("#actual_value").val();       
-		if(current_ele < parseInt(actua_value))
+		var actua_value = $("#actual_value").val(); 
+		var remaining_value1 = $("#remaining_time").val();      
+		if(current_ele < parseInt(remaining_value1))
 		{
-			var remaining_value = actua_value-current_ele
+			var remaining_value = remaining_value1-current_ele
 			$("#remaining_time").val(remaining_value);
 		}
 		else

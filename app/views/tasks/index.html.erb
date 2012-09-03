@@ -12,8 +12,8 @@
 			<th width ="200px">Task_type</th>
 			<th width ="100px">Disposition</th>
 			<th width ="100px">Acceptor</th>
-			<th width ="100px">Estimation time</th>
 			<th width ="200px">Description</th>
+			<th width ="100px">Estimation time</th>
 			<th width ="100px">Spent hours</th>
 			<th width ="100px">Remaining hours</th>
 			<th width ="50px"></th>
@@ -23,8 +23,7 @@
 			<% pro = Project.find(params[:project_id]) %>
 			<tr  align="center">
 				<td width ="200px"><%#= pro.inspect %>
-					<%= link_to ts.name,project_iteration_story_task_path(pro.id,@iteration.id,@story.id,ts.id) %>
-					
+					<%= link_to ts.name, project_iteration_story_task_path(pro.id,@iteration.id,@story.id,ts.id) %>
 				</td>
 				<td width ="200px">
 					<%=  ts.task_type %>
@@ -32,23 +31,23 @@
 					<%=  ts.disposition %>
 				</td><td width ="100px">
 					<%=  ts.acceptor %>
-				</td><td width ="100px">
-					<%=  ts.estimated_hours.round(2) %>
 				</td><td width ="200px">
 					<%=  ts.description %>
 				</td>
-				
 				<td width ="100px">
-					<%#@log = Log.find(:all, :conditions=>{ts.id => @log.id}) %>
-					<% @logs.each do |lg|  %>   <% if ts.id.to_i == lg.task_id.to_i %>    <%@spendhours= lg.spent_hours %> <% end %> <% end %><%= @spendhours%>
+					<%=  ts.estimated_hours.round(2) %>
+				</td>
+				<td width ="100px">
+					<% @logtest = Log.find(:all, :conditions => { :task_id => ts.id})%>
+					<%  @logtest.each do |logid| %>
+						<%= logid.spent_hours.round(2)%>
+					<%end%>
 				</td>	
 				<td width ="100px">
-					<% @logs.each do |lg|  %>  
-						<% if ts.id.to_i == lg.task_id.to_i %>    
-								<%@remaininghours= lg.remaining_time %>
-						<% end %>
-						<% end %>
-						<%= @remaininghours%>
+					<% @logtest = Log.find(:all, :conditions => { :task_id => ts.id})%>
+					<%  @logtest.each do |logid| %>
+						<%= logid.remaining_time.round(2)%>
+					<%end%>
 				</td>
 				<td width ="50px">
 					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
