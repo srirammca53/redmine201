@@ -3,6 +3,7 @@
 <% @pro = Project.find(params[:project_id]) %>
 <% @iteration = Iteration.find(params[:iteration_id]) %> 
 <% @story = Story.find(params[:story_id]) %> 
+
 <%#= link_to "total_tasks", total_tasks_project_iteration_story_tasks_path(@pro.id,@iteration.id,@story.id) %>
 <table >
 		<p><b>List of Tasks</b></p>
@@ -19,7 +20,6 @@
 			<th width ="50px"></th>
 		</tr>
 		<%@story.tasks.each do |ts| %>
-
 			<% pro = Project.find(params[:project_id]) %>
 			<tr  align="center">
 				<td width ="200px"><%#= pro.inspect %>
@@ -54,7 +54,16 @@
 					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
 				</td>
 				<td width ="50px">
-					<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),   new_task_log_path(ts.id), :class=> "updatetime" %>
+				<%@alllogs = Log.find(:all, :conditions => {:task_id => ts.id})%>
+				<%@alllogs.each do |logid|%>
+					<% @logid = logid.id%>
+				<%end%>
+					<%if @alllogs.count > 0%>
+							<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),   task_log_update_logs_path(ts.id, @logid), :class=> "updatetime" %>
+						<%else%>
+							<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),   new_task_log_path(ts.id), :class=> "updatetime" %>
+					<%end%>
+				
 				</td>
 			</tr>
 

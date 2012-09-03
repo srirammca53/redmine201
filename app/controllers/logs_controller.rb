@@ -18,7 +18,6 @@ def new
 end
 
 def create
-    raise @logs.inspect
     @task = Task.find(params[:task_id]) # task id
     @st = Story.find(:all, :conditions => {:id => @task.story_id})
     @st.each do |st|
@@ -63,27 +62,40 @@ def edit
     @task = @story.tasks.find(params[:id])
 end
 
-def update
-    @project = Project.find(params[:project_id])
-    @iteration = @project.iteration.find(params[:iteration_id])
-    @story = @iteration.story.find(params[:story_id])
-    @task = @story.tasks.find(params[:id])
- 	@user = User.find(:all)
- 	@user.each do |usr|
-		if @task.acceptor == usr.lastname
-		@usermail = usr
-		
-		end
-        end 
-    if @task.update_attributes(params[:task])
-	TaskMailer.task_update(@usermail).deliver
-        render :action => "show"
-    else
-		 render :action => "edit"
-    end
-
+def update_logs
+		@task = Task.find(params[:task_id])
+		@log =Log.find(params[:log_id])
+	 render :layout => false
 end
 
+def update
+  @task = Task.find(params[:task_id]) # task id
+    @st = Story.find(:all, :conditions => {:id => @task.story_id})
+    @st.each do |st|
+     @stid = st.id # story id
+    @stit_id = st.iteration_id 
+ 
+	end
+	
+	
+ @it = Iteration.find(:all, :conditions => {:id => @stit_id})
+
+  @it.each do |it|
+   @itid =it.id # iteration id
+    @itpro_id = it.project_id 
+	
+	end
+  
+  @proid = Project.find(:all, :conditions => {:id =>  @itpro_id})
+  
+   @proid.each do |pro|
+		@pro_id = pro.id   # project id 
+	end
+		@task = Task.find(params[:task_id])
+		@log =Log.find(params[:id])
+		@log.update_attributes(params[:log])	        
+		redirect_to project_iteration_story_tasks_path( @pro_id, @itid, @stid )
+end
 
 def show
 @project = Project.find(params[:project_id])
@@ -117,20 +129,7 @@ end
 
 
 def send_mails
-raise "yes".inspect
-end
-
-def update_tasks
-	@log = params[:spent_hours]
-	@date = params[:reported_date]
-	@current_task = params[:task_id]
-	@description = params[:description]
-	@task = Task.find(@current_task)
-        @remaining_time = @task.estimated_hours.to_i - @log.to_i
-	@user = User.current.lastname
-        #@log_exist = Log.find(:all , :conditions => {:task_id => @current_task})
-	@log = @task.logs.create(:spent_hours => @log,:report_date => @date.to_date,:user1 => @user, :task_id=>@current_task,:remaining_time => @remaining_time,:description => @description)
-	redirect_to    my_page_path
+	raise "yes".inspect
 end
 
 end
