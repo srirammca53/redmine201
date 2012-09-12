@@ -1,0 +1,11 @@
+
+<% if @tasks == nil %>
+<b> No tasks comes under Backlogs </b>
+<% elsif %>
+	<% @tasks.each do |task| %>
+		<% @task = Task.find(task) %>
+		<%= @task.name.inspect %>
+	<% end %>
+<br/>
+<%= @iteration %>
+<% end %>

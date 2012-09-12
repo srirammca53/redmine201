@@ -1,9 +1,35 @@
 <html>
 <head>
 <%= javascript_include_tag('jquery.min', 'jquery.datepick')%>
-<%= stylesheet_link_tag('jquery.datepick')%></head>
+<%= stylesheet_link_tag('jquery.datepick')%>
+<script>
+#selection
+{
+ margin-left: 15%;
+ padding-left: 20%;
+}
+</script>
+</head>
 <body>
 Generate reports:
+<%= form_tag (my_finalreport_path) do %>
+<table width=100% height="250px" border="1px">
+<tr>
+<td width=50% id="select">
+ 
+<% @option_value = @option %>
+<%= hidden_field_tag "option_value", value = @option %>
+<%if @option_value == "User" %>
+<%= select_tag  "option",   options_for_select(User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]}), :id=>"selection" %>
+<% end %>
+<%if @option_value == "Project" %>
+
+<%= select_tag "option", options_for_select(Project.find(:all).collect{|p|[p.name]}) %>
+
+
+<% end %>
+</td>
+<td width=50%>
 <table>
 	<tr >
 		<td>
@@ -18,14 +44,19 @@ Generate reports:
 		<td>
 			<%= hidden_field_tag 'end_date_hidden'%>
 		</td>
+		
+	</tr>
+	<tr>
+		
 		<td>
-			<%= submit_tag 'Generate', :id => "generateid"%>
-		</td>
-		<td>
-			<%= submit_tag 'reset', :id => "cleardates"%>
+			<%= submit_tag 'Generate', :id => "generateid"%> <%= submit_tag 'reset', :id => "cleardates"%>
 		</td>
 	</tr>
 </table>
+</td>
+</tr>
+</table>
+<% end %>
 </body>
 </html>
  <script>

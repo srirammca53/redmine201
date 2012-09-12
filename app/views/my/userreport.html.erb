@@ -1,0 +1,5 @@
+<%= form_for ( my_user_reports_path) do %>
+<%= select_tag  "user",   options_for_select(User.find(:all, :conditions =>"lastname= Admin").collect{|p|[p.lastname]}), :id=>"selection" %>
+<%= submit_tag "done" %>
+<% end %>
+

@@ -18,7 +18,7 @@ def new
 end
 
 def create
-    raise @logs.inspect
+  
     @task = Task.find(params[:task_id]) # task id
     @st = Story.find(:all, :conditions => {:id => @task.story_id})
     @st.each do |st|

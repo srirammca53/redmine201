@@ -6,14 +6,14 @@
 <h2>REPORTS</h2>
 </center>
 <hr/>
-<%= form_tag( my_generate_reports_path, :method => :post) do %>
+<%#= form_tag( my_generate_reports_path, :method => :post) do %>
 						
-								  <%= select_tag('select', options_for_select(["Project", "User"])) %>
+								  <%#= select_tag('select', options_for_select(["Project", "User"])) %>
 							
-								<%= submit_tag('select')%> 
+								<%#= submit_tag('select')%> 
 							
-						<% end %> 
-
-
+						<%# end %> 
+<%= link_to "project", my_projectreport_path %><br/>
+<%= link_to "user", my_userreport_path %>
 </body>
 </html>

@@ -43,6 +43,14 @@ class MyController < ApplicationController
 
   # Show user's page
   def page
+$date = Time.now
+@day = $date.wday
+if @day.to_i == 4
+	@user = User.current.id
+	@us = User.find(@user) 
+	usermail = @us
+	TaskMailer.weekly_mail(usermail).deliver
+end
     @user = User.current
    # @project = Project.find(params[:project_id])
     @blocks = @user.pref[:my_page_layout] || DEFAULT_LAYOUT
@@ -207,25 +215,47 @@ def generate_reports
 	
 end
 def project_reports
-@project = params[:project_id]
+@project = params[:project]
 
 end
 def user_reports
-@user = params[:user_id]
-@projects = Project.find(:all)
-@pro_arrays = Array.new
-@member = Member.find(:all, :conditions => {:user_id => @user })
-
+@user = params[:user]
+raise "ysese ".inspect
 end
 
 def projectreport
-@end =  Time.now.to_date 
-@start = @end.to_date - 70.days
-@project = Project.find(1)
-#raise @project.inspect
+@project = params[:project]
+
 end
 
 def userreport
+@users = User.find(:all)
+end
+
+def finalreport
+@project = params[:project]
+@user = params[:user]
+ 
 
 end
+
+def timesheet
+@user = User.current.lastname 
+
+end
+
+def mytimesheet
+@start = params[:start_date]
+@end = params[:end_date]
+@user = params[:user]
+#
+end
+
+
+def logs
+ params[:spent_hours].each do |t,values|
+raise values.values.inspect
+end
+end
+
 end

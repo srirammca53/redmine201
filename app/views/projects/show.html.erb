@@ -17,13 +17,47 @@
 	<b>Description : <u><%= @project.description %></u></b><br/>
 </td>
 <td>
-
-	<canvas id="venkat" width="250" height="150"></canvas>
-	<% @a =100%><% @b =80%>
+	 <% unless @project.id.blank? %>
+		<%@iteration_relatedcurrent_project = Iteration.find(:all, :conditions => {:project_id => @project.id})%>
+	<% unless @iteration_relatedcurrent_project.blank? %>
+	
+	<% @iteration_relatedcurrent_project.each do |iterationid|%>
+		<% @iteratonid = iterationid.id%>
+	<%end%>
+	<%else%>
+		<%@iteratonid =0%>
+	<%end%>
+	<%@story_estimation = Story.find(:all, :conditions => {:iteration_id => @iteratonid })%>
+	<% unless @story_estimation.blank? %>
+	
+	<%@story_test_id=Array.new%>
+	<%@final_story_estimation = 0%>
+	<%@story_estimation.each do |story_est|%>
+		<%@final_story_estimation += story_est.Estimated_hours%>
+		<%@story_test_id << story_est.id%>
+	<%end%>
+	<%else%>
+		<% @final_story_estimation =0%>
+	<%end%>
+	<% unless @story_test_id.blank? %>
+	<% @story_test_id.each do |alltask|%>
+		<% @tasks_all = Task.find(:all, :conditions => {:story_id => alltask }) %>
+	<%end%>
+	<% @count_tasks_estimation = 0%>
+	<% @tasks_all.each do |all_task_estimation| %>
+		<%@count_tasks_estimation += all_task_estimation.estimated_hours%>
+	<%end%>
+	<%else%>
+		
+	<%end%>
+	<%else%>
+		
+	<%end%>
+	<canvas id="venkat" width="250" height="150"></canvas>	
     <script>
         window.onload = function ()
         {
-            var bar5 = new RGraph.Bar('venkat', [[<%=@project.estimation_time%>,<%=@b%>,90]]);
+            var bar5 = new RGraph.Bar('venkat', [[<%=@project.estimation_time%>, <%= @final_story_estimation%>, <%= @count_tasks_estimation%>]]);
             bar5.Set('chart.colors', ['#CC1111', '#11CCCC', '#1111CC']); 
             bar5.Set('chart.labels', ['Project', 'UserStory', 'Task']);
             bar5.Set('chart.strokestyle', 'transparent');

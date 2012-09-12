@@ -53,10 +53,54 @@ description
 </td>
 </tr>
 </table>
+<% @total_hours = 0 %>
+<table>
+<% @logs = @task.logs.find(:all, :conditions => {:task_id => @task.id }) %>
+<tr>
+<th>Reported date </th>
+<th>Acceptor </th>
+<th>Description</th>
+<th>Spent hours </th>
+</tr>
+<% @logs.each do |log| %>
+<tr>
+<%#= log.inspect %>
+<td><%= log.report_date %></td>
+<td><%= link_to @task.acceptor , "#" %></td>
+<td><%= log.description %></td>
+<td><%= log.spent_hours %></td>
+</tr>
+<% @total_hours = @total_hours + log.spent_hours %>
+<% end %>
+
+<% if @task.status == true %>
+ <b>task completed</b>
+<%= button_to "Re Open task", reopen_task_path(@task.id) %>
+<%else%>
+<%= button_to "Complete", completetask_task_path(@task.id) %>
+<%end%>
+
+
+<hr/>
+<tr>
+
+<tf>
+<td> <b>Total Spent hours :</b> </td>
+<td></td>
+<td></td>
+<td><b> <%= @total_hours %> </b></td>
+</tf>
+</tr>
+</table>
+</table>
+
+
+
 <hr/>
 <%#= @project.id.inspect%>
 <%#= link_to "users_stories", project_iteration_story_tasks_path(@project.id, @iteration.id, @story.id )%>
 <%#= @project.inspect%>
 <%= link_to "tasks index page", project_iteration_story_tasks_path%> |
 <%= link_to "back to Projects list", projects_path%>
- <%#= link_to "reports" , project_iteration_story_task_timereports_path(@project.id, @iteration.id, @story.id, @task.id) %>
+<%#= link_to "reports" , project_iteration_story_task_timereports_path(@project.id, @iteration.id, @story.id, @task.id) %>
+

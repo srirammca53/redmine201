@@ -1,0 +1,32 @@
+<html>
+<body bgcolor ="gray">
+<center>
+<b><font color ="green"> Visper Tool Weekly Status Mail </font></b>
+</center>
+<hr/>
+<% @user = User.current.lastname.capitalize  %>
+<b>Mr.<%= @user %></b>
+<%= @Current_date = Date.today %><br/>
+<% @week = 0 %>
+<% @tasks =Task.find(:all,:conditions => {:acceptor => @user}) %>
+<% @total = 0 %>
+<% @tasks.each do | task| %>
+	 ~~~~~~~~~ <%= task.name %> <br/>
+	<% task.logs.each do |log| %>
+       		 <% @total =  @total.to_f + log.spent_hours.to_f %> 
+		
+	<% end %>
+* <%= @total %> 
+<% @week = @week.to_f + @total.to_f %>
+<br/>
+<% end %>
+Your week logged hours : <%= @week %> .
+<br/>
+Make sure your logged hours should be 40 hours 
+<hr/>
+
+<b><font color="blue">Thanks</font></b><br/>
+<b><font color="blue">Logicmatter Vispertool Team</font></b><br/>
+
+</body>
+</html>

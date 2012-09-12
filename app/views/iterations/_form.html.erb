@@ -12,7 +12,7 @@
   </div>
   <div class="field">
     
-    <%= f.select(:iterationtype, options_for_select(["Weekly", "Monthly", "Duo-Monthly"])) %>
+    <%= f.select(:iterationtype, options_for_select(["Weekly", "Monthly", "BIO-Monthly"])) %>
   </div>
   <div class="field">
     <%= f.label :Start_date %><br />
@@ -25,7 +25,7 @@
   </div>
    <div class="field">
     <%= f.label :Status %><br />
- <%= f.select(:status, options_for_select(["Planned","Open", "Closed", "Locked"])) %>
+ <%= f.select(:status, options_for_select(["Planned","Open"])) %>
 
 
   </div>

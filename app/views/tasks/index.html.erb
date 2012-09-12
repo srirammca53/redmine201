@@ -21,6 +21,7 @@
 		<%@story.tasks.each do |ts| %>
 
 			<% pro = Project.find(params[:project_id]) %>
+			 
 			<tr  align="center">
 				<td width ="200px"><%#= pro.inspect %>
 					<%= link_to ts.name,project_iteration_story_task_path(pro.id,@iteration.id,@story.id,ts.id) %>
@@ -51,10 +52,13 @@
 						<%= @remaininghours%>
 				</td>
 				<td width ="50px">
+					<%if !User.current.admin?  %>
 					<%= link_to "edit", edit_project_iteration_story_task_path(@project.id, @iteration.id, @story.id, ts.id)%>
+					
 				</td>
 				<td width ="50px">
 					<%= link_to (image_tag 'time1.png', :width => 20, :height => 20 ),   new_task_log_path(ts.id), :class=> "updatetime" %>
+					<% end %>
 				</td>
 			</tr>
 

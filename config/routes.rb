@@ -17,6 +17,13 @@
 
 RedmineApp::Application.routes.draw do
 	  resources :tasks do
+			collection do
+			   post 'logs'
+			end
+			member do
+				post 'completetask'
+				post  'reopen'
+			end
 			resources :logs do
 			   
 				get 'send_mails'
@@ -26,6 +33,14 @@ RedmineApp::Application.routes.draw do
 		  end 
 
   resources :timereports
+
+  resources :backlogs do
+	collection do
+		post 'assign'
+	end
+	resources :tasks
+	
+   end 
 
   root :to => 'myprojects#index', :as => 'home'
   resources :myprojects
@@ -88,6 +103,10 @@ RedmineApp::Application.routes.draw do
   match 'my/user_reports', :controller => 'my', :action => 'user_reports', :via => [:get, :post]
   match 'my/userreport', :controller => 'my', :action => 'userreport', :via => [:get, :post]
   match 'my/projectreport', :controller => 'my', :action => 'projectreport', :via => [:get, :post]
+  match 'my/finalreport', :controller => 'my', :action => 'finalreport', :via => [:get, :post]
+  match 'my/timesheet', :controller => 'my', :action => 'timesheet', :via => [:get, :post]
+  match 'my/mytimesheet', :controller => 'my', :action => 'mytimesheet', :via => [:get, :post]
+  match 'my/logs', :controller => 'my', :action => 'logs', :via => [:get, :post]
   resources :users
   match 'users/:id/memberships/:membership_id', :to => 'users#edit_membership', :via => :put, :as => 'user_membership'
   match 'users/:id/memberships/:membership_id', :to => 'users#destroy_membership', :via => :delete
@@ -120,6 +139,7 @@ RedmineApp::Application.routes.draw do
 		  resources :tasks do
 	 	    collection do 
 			get 'total_tasks'
+			
 			
 			end
 		  end 

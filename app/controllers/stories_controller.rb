@@ -20,8 +20,8 @@ def create
 	@project = Project.find(params[:project_id])
 	 @iteration = Iteration.find(params[:iteration_id])
       @story = @iteration.story.create(params[:story])	
-   
-       render :action => "show"
+		redirect_to project_iteration_story_path(@project.id, @iteration.id, @story.id)
+       #render :action => "show"
 end
 
 
