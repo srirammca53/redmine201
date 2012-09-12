@@ -158,8 +158,9 @@ def logs
 @spent = @values.values[0]
 @desc = @values.values[1]
 @date = Time.now.to_date
+if @spent != "" 
 @log = @task.logs.create(:spent_hours => @spent , :description => @desc, :report_date => @date )
-
+end
 end
 end
 end
