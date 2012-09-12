@@ -39,7 +39,8 @@ def create
     @task = @story.tasks.create(params[:task]) 
     @stid = @story.name
     @it = Iteration.find(:all , :conditions => {:id => @story.iteration_id }) 
-     @it.each do |iname|  @iname = iname.name end 
+    @it.each do |iname|  @iname = iname.name end 
+	
 	@user.each do |usr|
 		if @task.acceptor == usr.lastname
 		@usermail = usr

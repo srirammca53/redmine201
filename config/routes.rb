@@ -28,6 +28,8 @@ RedmineApp::Application.routes.draw do
 			   
 				get 'send_mails'
 				post 'update_tasks', :on => :member
+				get 'update_logs'
+	
 			    
 			end
 		  end 

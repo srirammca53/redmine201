@@ -43,4 +43,5 @@ config.action_mailer.smtp_settings = {
   config.action_mailer.logger = nil
 
   config.active_support.deprecation = :log
+  config.assets.compile = true
 end

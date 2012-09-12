@@ -1,0 +1,30 @@
+<%#= form_for @log, :url => {:action => :updatelogs, :id => @task.id } do |f| %>
+
+<%= form_for @log, :url => {:action => :update, :id => @task.id } do |f| %>
+	Reported Date: <%= f.text_field :report_date, :id => :popupDatepicker%><br>
+	Spent Hours: <%= f.text_field :spent_hours, :onchange=> "myFunction()", :id => "log_spent_hours"%><br>
+	Remaining Time: <%= f.text_field :remaining_time, :id => "remaining_time"%><br>
+	<span id ="est" >Estimated Time: <%= f.text_field :estimated_time, :value => "#{@task.estimated_hours.round(2)}", :id => "actual_value"%></span><br>
+	User One: <%= f.text_field :user1%><br>
+	User Two: <%= f.text_field :user2%><br>
+	<%= f.submit %>
+<%end%>
+<script>
+	function myFunction()
+	{
+		var current_ele = $("#log_spent_hours").val();
+		var actua_value = $("#actual_value").val(); 
+		var remaining_value1 = $("#remaining_time").val();      
+		if(current_ele < parseInt(remaining_value1))
+		{
+			var remaining_value = remaining_value1-current_ele
+			$("#remaining_time").val(remaining_value);
+		}
+		else
+		{
+			alert("hey you exceeded actuall value");
+		}
+	}
+</script> 
+
+
